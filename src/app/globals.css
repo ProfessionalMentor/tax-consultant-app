@@ -1,0 +1,26 @@
+@import "tailwindcss";
+
+@theme {
+  --color-midnight: #020617;
+  --color-gold: #A85507;
+  --color-cyan: #0EA5E9;
+}
+
+body {
+  background-color: var(--color-background);
+  color: var(--color-foreground);
+  font-family: var(--font-sans), sans-serif;
+}
+
+/* Shadcn/UI Base Variables Setup */
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 222.2 84% 4.9%;
+    --radius: 0.5rem;
+  }
+  .dark {
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
+  }
+}

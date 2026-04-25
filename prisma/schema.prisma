@@ -1,0 +1,63 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id           String        @id @default(auto()) @map("_id") @db.ObjectId
+  name         String
+  email        String        @unique
+  password     String
+  role         Role          @default(CLIENT)
+  ntnNumber    String?
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
+  
+  documents    Document[]
+  appointments Appointment[]
+}
+
+model Document {
+  id           String        @id @default(auto()) @map("_id") @db.ObjectId
+  name         String
+  fileUrl      String        // Secured URL from UploadThing/Cloudinary
+  status       DocStatus     @default(PENDING_REVIEW)
+  uploadedAt   DateTime      @default(now())
+  
+  userId       String        @db.ObjectId
+  user         User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model Appointment {
+  id            String        @id @default(auto()) @map("_id") @db.ObjectId
+  serviceNeeded String
+  notes         String?
+  scheduledFor  DateTime?
+  status        ApptStatus    @default(PENDING)
+  createdAt     DateTime      @default(now())
+
+  userId        String        @db.ObjectId
+  user          User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+enum Role {
+  ADMIN
+  CLIENT
+}
+
+enum DocStatus {
+  PENDING_REVIEW
+  VERIFIED
+  REJECTED
+}
+
+enum ApptStatus {
+  PENDING
+  CONFIRMED
+  COMPLETED
+  CANCELLED
+}
