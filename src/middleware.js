@@ -1,5 +1,8 @@
-import { auth } from "@/auth";
+import NextAuth from "next-auth";
+import { authConfig } from "@/auth.config";
 import { NextResponse } from "next/server";
+
+const { auth } = NextAuth(authConfig);
 
 export default auth((req) => {
   const { nextUrl } = req;
@@ -18,7 +21,7 @@ export default auth((req) => {
   }
 
   // Protect Client Portals
-  if (nextUrl.pathname.startsWith("/dashboard")) {
+  if (nextUrl.pathname.startsWith("/dashboard") || nextUrl.pathname.startsWith("/client")) {
     if (!isLoggedIn) {
       return NextResponse.redirect(new URL("/login", nextUrl));
     }
@@ -28,5 +31,5 @@ export default auth((req) => {
 });
 
 export const config = {
-  matcher: ["/admin/:path*", "/dashboard/:path*"],
+  matcher: ["/admin/:path*", "/dashboard/:path*", "/client/:path*"],
 };

@@ -25,7 +25,7 @@ export default function LitigationPage() {
             Unyielding <span className="text-gold">Appellate Advocacy</span>
           </h1>
           <p className="text-xl text-slate-400 leading-relaxed">
-            Represented by a powerhouse legal team. We don't just file cases; we architect undeniable victories through aggressive procedural mastery and High Court prestige.
+            Represented by a powerhouse legal team. We don&apos;t just file cases; we architect undeniable victories through aggressive procedural mastery and High Court prestige.
           </p>
         </div>
 

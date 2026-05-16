@@ -48,11 +48,6 @@ export default function Navbar() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Close mobile menu on route change
-  useEffect(() => {
-    setMobileMenuOpen(false);
-  }, [pathname]);
-
   return (
     <>
       <motion.nav 
@@ -198,10 +193,11 @@ export default function Navbar() {
                     key={i} 
                     className="flex flex-col border-b border-white/5 pb-4 last:border-0 last:pb-0"
                   >
-                    <Link 
-                      href={item.href}
-                      className="text-2xl font-black text-white py-2 tracking-tight"
-                    >
+                  <Link 
+                    href={item.href}
+                    onClick={() => setMobileMenuOpen(false)}
+                    className="text-2xl font-black text-white py-2 tracking-tight"
+                  >
                       {item.name}
                     </Link>
                     {item.dropdown && (
@@ -210,6 +206,7 @@ export default function Navbar() {
                           <Link 
                             key={j}
                             href={dropItem.href}
+                            onClick={() => setMobileMenuOpen(false)}
                             className="text-[17px] font-semibold text-slate-400 hover:text-gold transition-colors block"
                           >
                             {dropItem.name}
@@ -229,6 +226,7 @@ export default function Navbar() {
               >
                 <Link 
                   href="/login" 
+                  onClick={() => setMobileMenuOpen(false)}
                   className="w-full flex items-center justify-center gap-3 p-4 rounded-2xl bg-slate-800/50 backdrop-blur-md border border-slate-700/50 hover:border-cyan/50 text-white font-bold transition-all shadow-lg"
                 >
                   <User className="w-5 h-5 text-cyan" /> 
@@ -236,6 +234,7 @@ export default function Navbar() {
                 </Link>
                 <Link 
                   href="/contact" 
+                  onClick={() => setMobileMenuOpen(false)}
                   className="w-full text-center text-[#040814] font-black bg-linear-to-r from-gold via-[#e3b850] to-[#c59628] hover:to-[#f0c560] p-4 rounded-2xl text-[17px] shadow-[0_0_25px_rgba(197,150,40,0.3)] transition-all"
                 >
                   Book Priority Consultation

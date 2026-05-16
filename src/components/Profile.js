@@ -63,7 +63,7 @@ export default function Profile() {
             </p>
             <div className="text-slate-400 leading-relaxed text-lg space-y-6">
               <p>
-                Our lead consultant brings over two decades of practical experience navigating the complexities of Pakistan's legal, taxation, and corporate landscape. We provide authoritative advice to secure your business assets, ensure absolute compliance, and defend your rights.
+                Our lead consultant brings over two decades of practical experience navigating the complexities of Pakistan&apos;s legal, taxation, and corporate landscape. We provide authoritative advice to secure your business assets, ensure absolute compliance, and defend your rights.
               </p>
               
               <ul className="space-y-4 pt-2">
