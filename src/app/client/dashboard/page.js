@@ -1,86 +1,198 @@
-import { FileText, UploadCloud, Clock, CheckCircle, ShieldAlert } from 'lucide-react';
+'use client';
 
-export const metadata = {
-  title: "Client Dashboard",
-  description: "Secure client portal for uploading and tracking legal documents.",
-};
+import { useEffect, useState } from 'react';
+import {
+  Briefcase,
+  FileCheck,
+  AlertTriangle,
+  Gavel,
+  Loader2,
+} from 'lucide-react';
+import Link from 'next/link';
 
-export default function ClientDashboard() {
+export default function DashboardPage() {
+  const [stats, setStats] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    fetchDashboardData();
+  }, []);
+
+  const fetchDashboardData = async () => {
+    try {
+      setLoading(true);
+      
+      // Fetch cases
+      const casesRes = await fetch('/api/cases');
+      const cases = await casesRes.json();
+
+      // Fetch tax records
+      const taxRes = await fetch('/api/tax-records');
+      const taxRecords = await taxRes.json();
+
+      // Fetch invoices
+      const invoicesRes = await fetch('/api/invoices');
+      const invoices = await invoicesRes.json();
+
+      // Fetch notifications
+      const notificationsRes = await fetch('/api/notifications');
+      const notifications = await notificationsRes.json();
+
+      // Calculate stats
+      const activeCases = cases.filter(c => c.status === 'ACTIVE' || c.status === 'HEARING').length;
+      const nextHearing = cases
+        .filter(c => c.nextHearingDate)
+        .sort((a, b) => new Date(a.nextHearingDate) - new Date(b.nextHearingDate))[0];
+      
+      const taxStatus = cases.find(c => c.type === 'TAXATION')?.status || 'Active';
+      const pendingAlerts = notifications.filter(n => !n.isRead).length;
+      const pendingInvoices = invoices.filter(i => i.invoiceStatus === 'PENDING' || i.invoiceStatus === 'OVERDUE').length;
+
+      setStats({
+        activeCases,
+        nextHearing,
+        taxStatus,
+        pendingAlerts,
+        pendingInvoices,
+        totalCases: cases.length,
+      });
+      
+      setError(null);
+    } catch (err) {
+      console.error('Error fetching dashboard data:', err);
+      setError('Failed to load dashboard data');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const formatDate = (date) => {
+    if (!date) return 'N/A';
+    return new Date(date).toLocaleDateString('en-US', {
+      month: 'short',
+      day: 'numeric',
+    });
+  };
+
+  const statCards = [
+    {
+      title: 'Active Cases',
+      value: stats?.activeCases || '0',
+      desc: 'Civil & criminal matters',
+      icon: Briefcase,
+      href: '/client/cases',
+    },
+    {
+      title: 'Next Hearing',
+      value: stats?.nextHearing ? formatDate(stats.nextHearing.nextHearingDate) : 'N/A',
+      desc: stats?.nextHearing?.courtName || 'District Court',
+      icon: Gavel,
+      href: '/client/hearings',
+    },
+    {
+      title: 'Tax Status',
+      value: 'Active',
+      desc: 'FBR compliant',
+      icon: FileCheck,
+      href: '/client/tax-compliance',
+    },
+    {
+      title: 'Pending Alerts',
+      value: stats?.pendingAlerts || '0',
+      desc: 'Notifications',
+      icon: AlertTriangle,
+      href: '/client/notifications',
+    },
+  ];
+
+  if (loading) {
+    return (
+      <div className="space-y-6">
+        <div>
+          <h1 className="text-3xl font-bold">Client Dashboard</h1>
+          <p className="text-gray-600">Overview of your legal and tax matters.</p>
+        </div>
+        <div className="flex items-center justify-center py-12">
+          <Loader2 className="animate-spin text-blue-600" size={32} />
+        </div>
+      </div>
+    );
+  }
+
   return (
-    <div className="min-h-screen bg-[#0a0f1c] pt-24 pb-12 relative overflow-hidden">
-      {/* Decorative Blob */}
-      <div className="absolute top-1/4 right-0 w-[500px] h-[500px] bg-cyan-900/10 rounded-full blur-[120px] pointer-events-none translate-x-1/2"></div>
+    <div className="space-y-6">
+      <div>
+        <h1 className="text-3xl font-bold">Client Dashboard</h1>
+        <p className="text-gray-600">Overview of your legal and tax matters.</p>
+      </div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        
-        {/* Header Section */}
-        <div className="bg-[#040814]/80 backdrop-blur-xl border border-white/10 rounded-3xl p-8 mb-8 text-white shadow-[0_0_40px_rgba(0,0,0,0.5)] overflow-hidden relative">
-          <div className="relative z-10">
-            <h1 className="text-3xl font-bold mb-2">Welcome back, Client</h1>
-            <p className="text-emerald-100">Your Filer Status: <span className="font-bold text-white bg-emerald-600 px-3 py-1 rounded-full text-sm ml-2">Active Taxpayer</span></p>
+      {error && (
+        <div className="bg-red-50 border border-red-200 rounded-lg p-4 text-red-700">
+          {error}
+        </div>
+      )}
+
+      <div className="grid md:grid-cols-4 gap-5">
+        {statCards.map((item) => {
+          const Icon = item.icon;
+
+          return (
+            <Link href={item.href} key={item.title}>
+              <div className="bg-white rounded-2xl p-5 shadow-sm border hover:shadow-md transition-shadow cursor-pointer h-full">
+                <Icon className="mb-4 text-blue-600" size={24} />
+
+                <h3 className="text-gray-500 text-sm">{item.title}</h3>
+
+                <p className="text-2xl font-bold">{item.value}</p>
+
+                <p className="text-sm text-gray-500">{item.desc}</p>
+              </div>
+            </Link>
+          );
+        })}
+      </div>
+
+      {/* Quick Summary Section */}
+      <div className="grid md:grid-cols-2 gap-6">
+        {/* Recent Cases */}
+        <div className="bg-white rounded-2xl p-6 shadow-sm border">
+          <h2 className="text-xl font-bold mb-4">Recent Cases</h2>
+          <div className="space-y-3">
+            {stats?.totalCases > 0 ? (
+              <p className="text-sm text-gray-600">
+                You have {stats.totalCases} total cases
+              </p>
+            ) : (
+              <p className="text-sm text-gray-500">No cases yet</p>
+            )}
+            <Link
+              href="/client/cases"
+              className="inline-block text-blue-600 hover:text-blue-700 font-medium text-sm"
+            >
+              View all cases →
+            </Link>
           </div>
-          <ShieldAlert className="absolute right-0 top-0 w-64 h-64 text-emerald-700 opacity-20 -mr-12 -mt-12" />
         </div>
 
-        {/* Dashboard Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          
-          {/* Main Action Area */}
-          <div className="md:col-span-2 space-y-8 relative z-10">
-            <div className="bg-[#040814]/80 backdrop-blur-xl rounded-3xl p-8 shadow-lg border border-white/5">
-              <h2 className="text-xl font-bold text-white mb-6 flex items-center">
-                <UploadCloud className="mr-3 text-emerald-500" /> Upload Documents Securely
-              </h2>
-              <div className="border border-dashed border-white/20 rounded-2xl p-12 text-center hover:bg-slate-900/50 hover:border-gold/30 transition-colors cursor-pointer group">
-                <div className="mx-auto flex justify-center text-slate-500 group-hover:text-gold mb-4 transition-colors">
-                  <UploadCloud className="h-12 w-12" />
-                </div>
-                <p className="text-slate-600 font-medium">Click to upload or drag & drop</p>
-                <p className="text-sm text-slate-400 mt-2">CNIC, Invoices, Bank Statements (PDF, JPG up to 10MB)</p>
-              </div>
-            </div>
-
-            <div className="bg-[#040814]/80 backdrop-blur-xl rounded-3xl p-8 shadow-lg border border-white/5">
-              <h2 className="text-xl font-bold text-white mb-6 flex items-center">
-                <Clock className="mr-3 text-emerald-500" /> Recent Activity
-              </h2>
-              <ul className="space-y-4">
-                {[
-                  { title: 'Tax Return 2025 Filed', date: 'Oct 15, 2025', status: 'Completed' },
-                  { title: 'CNIC Uploaded', date: 'Oct 10, 2025', status: 'Completed' },
-                  { title: 'SECP Annual Return', date: 'Pending Client Signature', status: 'Pending' }
-                ].map((item, i) => (
-                  <li key={i} className="flex justify-between items-center p-4 rounded-xl border border-white/5 hover:bg-slate-900/50 transition-colors">
-                    <div>
-                      <p className="font-bold text-slate-300">{item.title}</p>
-                      <p className="text-sm text-slate-500">{item.date}</p>
-                    </div>
-                    <span className={`px-3 py-1 rounded-full text-xs font-bold ${item.status === 'Completed' ? 'bg-emerald-500/20 text-emerald-400 border border-emerald-500/20' : 'bg-gold/20 text-gold border border-gold/20'}`}>
-                      {item.status}
-                    </span>
-                  </li>
-                ))}
-              </ul>
-            </div>
+        {/* Pending Invoices */}
+        <div className="bg-white rounded-2xl p-6 shadow-sm border">
+          <h2 className="text-xl font-bold mb-4">Billing</h2>
+          <div className="space-y-3">
+            {stats?.pendingInvoices > 0 ? (
+              <p className="text-sm text-gray-600">
+                {stats.pendingInvoices} invoice(s) pending
+              </p>
+            ) : (
+              <p className="text-sm text-gray-500">All invoices paid</p>
+            )}
+            <Link
+              href="/client/billing"
+              className="inline-block text-blue-600 hover:text-blue-700 font-medium text-sm"
+            >
+              View invoices →
+            </Link>
           </div>
-
-          {/* Sidebar Area */}
-          <div className="space-y-8 relative z-10">
-            <div className="bg-[#040814]/80 backdrop-blur-xl rounded-3xl p-8 text-white shadow-lg border border-white/5">
-              <h3 className="text-xl font-bold mb-6 flex items-center">
-                <FileText className="mr-3 text-emerald-400" /> My Documents
-              </h3>
-              <ul className="space-y-4">
-                <li><a href="#" className="flex items-center text-slate-300 hover:text-white transition-colors"><CheckCircle className="w-4 h-4 mr-2 text-emerald-400"/> NTN Certificate.pdf</a></li>
-                <li><a href="#" className="flex items-center text-slate-300 hover:text-white transition-colors"><CheckCircle className="w-4 h-4 mr-2 text-emerald-400"/> FBR ATL Proof.pdf</a></li>
-                <li><a href="#" className="flex items-center text-slate-300 hover:text-white transition-colors"><CheckCircle className="w-4 h-4 mr-2 text-emerald-400"/> SECP Form 29.pdf</a></li>
-              </ul>
-              <button className="w-full mt-8 py-3 bg-linear-to-r from-gold to-[#c59628] hover:from-[#e3b850] hover:to-gold text-[#040814] font-bold rounded-xl transition-all shadow-[0_0_20px_rgba(212,168,64,0.2)] transform hover:-translate-y-1">
-                Request Missing Docs
-              </button>
-            </div>
-          </div>
-
         </div>
       </div>
     </div>

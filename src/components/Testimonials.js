@@ -79,7 +79,7 @@ export default function Testimonials() {
                 ))}
               </div>
               <p className="text-slate-300 leading-relaxed mb-6 italic">
-                "{testimonial.text}"
+                &ldquo;{testimonial.text}&rdquo;
               </p>
               <div>
                 <p className="text-white font-bold">{testimonial.name}</p>

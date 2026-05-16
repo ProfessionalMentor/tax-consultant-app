@@ -59,7 +59,7 @@ export default function Hero() {
         >
           <motion.div variants={itemVariants} className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-slate-900/50 backdrop-blur-md border border-slate-800 text-sm font-semibold text-cyan mb-8 shadow-2xl">
             <ShieldCheck className="w-4 h-4" />
-            <span>Pakistan's Premier Trusted Corporate Law & Tax Experts</span>
+            <span>Pakistan&apos;s Premier Trusted Corporate Law & Tax Experts</span>
           </motion.div>
 
           <motion.h1 

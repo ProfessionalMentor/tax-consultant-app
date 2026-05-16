@@ -18,7 +18,7 @@ export default function AdminDashboard() {
             <h1 className="text-3xl font-extrabold text-white flex items-center">
               <ShieldCheck className="w-8 h-8 mr-3 text-gold" /> Admin Control Center
             </h1>
-            <p className="text-slate-400 mt-1">Manage all your firm's cases, leads, and documents in one place.</p>
+            <p className="text-slate-400 mt-1">Manage all your firm&apos;s cases, leads, and documents in one place.</p>
           </div>
           <button className="px-6 py-2 bg-linear-to-r from-gold to-[#c59628] hover:from-[#e3b850] hover:to-gold text-[#040814] font-bold rounded-lg shadow-lg transform hover:-translate-y-1 transition-all">
             + Add New Client

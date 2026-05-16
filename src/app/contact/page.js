@@ -16,7 +16,7 @@ export default function ContactPage() {
         
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
           <div>
-            <h1 className="text-4xl font-extrabold text-white tracking-tight mb-4">Let's Discuss Your <span className="text-transparent bg-clip-text bg-linear-to-r from-gold to-[#e3b850]">Needs</span></h1>
+            <h1 className="text-4xl font-extrabold text-white tracking-tight mb-4">Let&apos;s Discuss Your <span className="text-transparent bg-clip-text bg-linear-to-r from-gold to-[#e3b850]">Needs</span></h1>
             <p className="text-lg text-slate-400 leading-relaxed mb-8">
               Whether you need to file your annual tax return or require complex corporate litigation support, our team is ready to assist.
             </p>

@@ -7,57 +7,506 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+// ============ USER MANAGEMENT ============
 model User {
-  id           String        @id @default(auto()) @map("_id") @db.ObjectId
-  name         String
-  email        String        @unique
-  password     String
-  role         Role          @default(CLIENT)
-  ntnNumber    String?
-  createdAt    DateTime      @default(now())
-  updatedAt    DateTime      @updatedAt
+  id                    String              @id @default(auto()) @map("_id") @db.ObjectId
+  name                  String
+  email                 String              @unique
+  password              String
+  phoneNumber           String?
+  role                  Role                @default(CLIENT)
+  is2FAEnabled          Boolean             @default(false)
+  twoFactorSecret       String?
   
-  documents    Document[]
-  appointments Appointment[]
+  // Client Tax Info
+  ntnNumber             String?             @unique
+  strn                  String?             @unique
+  cnic                  String?             @unique
+  
+  // Client Profile
+  businessName          String?
+  businessType          String?
+  taxFilingStatus       TaxStatus           @default(ACTIVE)
+  lastTaxReturn         DateTime?
+  
+  // Professional Info (for Admin/Lawyer/Accountant)
+  specialization        String?
+  licenseNumber         String?
+  
+  createdAt             DateTime            @default(now())
+  updatedAt             DateTime            @updatedAt
+  
+  // Relations
+  cases                 Case[]              @relation("ClientCases")
+  assignedCases         Case[]              @relation("LawyerCases")
+  documents             Document[]
+  appointments          Appointment[]
+  invoices              Invoice[]
+  messages              Message[]
+  sentMessages          Message[]           @relation("SentMessages")
+  notifications         Notification[]
+  auditLogs             AuditLog[]
+  taxRecords            TaxRecord[]
+  hearings              Hearing[]
 }
 
-model Document {
-  id           String        @id @default(auto()) @map("_id") @db.ObjectId
-  name         String
-  fileUrl      String        // Secured URL from UploadThing/Cloudinary
-  status       DocStatus     @default(PENDING_REVIEW)
-  uploadedAt   DateTime      @default(now())
+// ============ CASE & MATTER MANAGEMENT ============
+model Case {
+  id                    String              @id @default(auto()) @map("_id") @db.ObjectId
+  caseNumber            String              @unique
+  title                 String
+  description           String?
+  type                  CaseType
+  status                CaseStatus          @default(PENDING)
+  priority              Priority            @default(MEDIUM)
   
-  userId       String        @db.ObjectId
-  user         User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  // Client & Lawyer
+  clientId              String              @db.ObjectId
+  client                User                @relation("ClientCases", fields: [clientId], references: [id], onDelete: Cascade)
+  
+  lawyerId              String?             @db.ObjectId
+  assignedLawyer        User?               @relation("LawyerCases", fields: [lawyerId], references: [id])
+  
+  // Court Info
+  courtName             String?
+  courtLocation         String?
+  judicialOfficer       String?
+  caseRegistrationNo    String?
+  
+  // Dates
+  filingDate            DateTime?
+  nextHearingDate       DateTime?
+  lastHearingDate       DateTime?
+  
+  // Finance
+  retainerFee           Float               @default(0)
+  otherFees             Float               @default(0)
+  courtCharges          Float               @default(0)
+  
+  createdAt             DateTime            @default(now())
+  updatedAt             DateTime            @updatedAt
+  
+  // Relations
+  hearings              Hearing[]
+  courtOrders           CourtOrder[]
+  documents             CaseDocument[]
+  auditLogs             AuditLog[]
+}
+
+model Hearing {
+  id                    String              @id @default(auto()) @map("_id") @db.ObjectId
+  caseId                String              @db.ObjectId
+  case                  Case                @relation(fields: [caseId], references: [id], onDelete: Cascade)
+  
+  hearingDate           DateTime
+  courtRoom             String?
+  judgeAssigned         String?
+  hearingStatus         HearingStatus       @default(SCHEDULED)
+  
+  // Hearing Details
+  agenda                String?
+  orderDocumentUrl      String?
+  courtOrderStatus      String?
+  
+  // Assigned Staff
+  assignedLawyerId      String?             @db.ObjectId
+  assignedLawyer        User?               @relation(fields: [assignedLawyerId], references: [id])
+  
+  notes                 String?
+  outcome               String?
+  nextStepsRecommended  String?
+  
+  createdAt             DateTime            @default(now())
+  updatedAt             DateTime            @updatedAt
+}
+
+model CourtOrder {
+  id                    String              @id @default(auto()) @map("_id") @db.ObjectId
+  caseId                String              @db.ObjectId
+  case                  Case                @relation(fields: [caseId], references: [id], onDelete: Cascade)
+  
+  orderDate             DateTime
+  orderType             String
+  orderContent          String
+  documentUrl           String
+  orderStatus           String              @default("ACTIVE")
+  interimRelief         String?
+  
+  createdAt             DateTime            @default(now())
+}
+
+// ============ TAX & CORPORATE COMPLIANCE ============
+model TaxRecord {
+  id                    String              @id @default(auto()) @map("_id") @db.ObjectId
+  userId                String              @db.ObjectId
+  user                  User                @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
+  recordType            TaxRecordType
+  taxYear               String
+  filingPeriod          String?
+  
+  // FBR Returns
+  ntnNumber             String?
+  incomeTaxReturn       String?             // File URL
+  salesTaxReturn        String?             // File URL
+  
+  // SECP Corporate
+  strn                  String?
+  companyRegistration   String?
+  incorporationNo       String?
+  annualFormType        String?             // Form A, Form 29, Form 21
+  
+  // Status & Compliance
+  filingStatus          ComplianceStatus    @default(PENDING)
+  filingDeadline        DateTime?
+  filedDate             DateTime?
+  acknowledgementNo     String?
+  acknowledgementUrl    String?
+  
+  // PRA & E-PADS
+  praStatus             String?
+  epadsStatus           String?
+  
+  // Audit/Notices
+  noticeReceived        Boolean             @default(false)
+  noticeDate            DateTime?
+  noticeContent         String?
+  noticeDocumentUrl     String?
+  responseDocumentUrl   String?
+  
+  createdAt             DateTime            @default(now())
+  updatedAt             DateTime            @updatedAt
+}
+
+// ============ DOCUMENT MANAGEMENT ============
+model Document {
+  id                    String              @id @default(auto()) @map("_id") @db.ObjectId
+  userId                String              @db.ObjectId
+  user                  User                @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
+  documentName          String
+  fileUrl               String
+  fileType              String
+  fileSize              Int                 // in bytes
+  documentType          DocumentType
+  status                DocumentStatus      @default(ACTIVE)
+  isConfidential        Boolean             @default(false)
+  
+  description           String?
+  metadata              String?             // JSON string for additional metadata
+  
+  uploadedAt            DateTime            @default(now())
+  updatedAt             DateTime            @updatedAt
+  
+  // Relations
+  caseDocuments         CaseDocument[]
+}
+
+model CaseDocument {
+  id                    String              @id @default(auto()) @map("_id") @db.ObjectId
+  caseId                String              @db.ObjectId
+  case                  Case                @relation(fields: [caseId], references: [id], onDelete: Cascade)
+  
+  documentId            String              @db.ObjectId
+  document              Document            @relation(fields: [documentId], references: [id], onDelete: Cascade)
+  
+  @@unique([caseId, documentId])
+}
+
+// ============ BILLING & PAYMENTS ============
+model Invoice {
+  id                    String              @id @default(auto()) @map("_id") @db.ObjectId
+  invoiceNumber         String              @unique
+  userId                String              @db.ObjectId
+  user                  User                @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
+  description           String
+  amountBilled          Float
+  amountPaid            Float               @default(0)
+  balanceDue            Float
+  
+  invoiceDate           DateTime
+  dueDate               DateTime
+  paidDate              DateTime?
+  
+  invoiceStatus         InvoiceStatus       @default(PENDING)
+  paymentMethod         String?
+  transactionReference  String?
+  
+  // Fee Breakdown
+  retainerFee           Float               @default(0)
+  perHearingFee         Float               @default(0)
+  governmentFilingFees  Float               @default(0)
+  otherCharges          Float               @default(0)
+  
+  notes                 String?
+  
+  createdAt             DateTime            @default(now())
+  updatedAt             DateTime            @updatedAt
+}
+
+model Payment {
+  id                    String              @id @default(auto()) @map("_id") @db.ObjectId
+  invoiceId             String              @db.ObjectId
+  
+  amount                Float
+  paymentMethod         PaymentMethod
+  transactionId         String              @unique
+  
+  bankName              String?
+  accountNumber         String?
+  
+  paymentStatus         PaymentStatus       @default(PENDING)
+  paidAt                DateTime?
+  
+  createdAt             DateTime            @default(now())
+}
+
+// ============ COMMUNICATION & SUPPORT ============
+model Message {
+  id                    String              @id @default(auto()) @map("_id") @db.ObjectId
+  
+  senderId              String              @db.ObjectId
+  sender                User                @relation("SentMessages", fields: [senderId], references: [id], onDelete: Cascade)
+  
+  recipientId           String              @db.ObjectId
+  recipient             User                @relation(fields: [recipientId], references: [id], onDelete: Cascade)
+  
+  messageType           MessageType         @default(GENERAL)
+  subject               String?
+  content               String
+  attachmentUrl         String?
+  
+  isRead                Boolean             @default(false)
+  readAt                DateTime?
+  
+  createdAt             DateTime            @default(now())
+  updatedAt             DateTime            @updatedAt
 }
 
 model Appointment {
-  id            String        @id @default(auto()) @map("_id") @db.ObjectId
-  serviceNeeded String
-  notes         String?
-  scheduledFor  DateTime?
-  status        ApptStatus    @default(PENDING)
-  createdAt     DateTime      @default(now())
-
-  userId        String        @db.ObjectId
-  user          User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  id                    String              @id @default(auto()) @map("_id") @db.ObjectId
+  userId                String              @db.ObjectId
+  user                  User                @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
+  appointmentType       AppointmentType
+  description           String?
+  
+  scheduledFor          DateTime?
+  duration              Int?                // in minutes
+  location              String?
+  meetingLink           String?
+  
+  appointmentStatus     AppointmentStatus   @default(PENDING)
+  
+  notes                 String?
+  reminder              Boolean             @default(true)
+  
+  createdAt             DateTime            @default(now())
+  updatedAt             DateTime            @updatedAt
 }
 
+// ============ NOTIFICATIONS ============
+model Notification {
+  id                    String              @id @default(auto()) @map("_id") @db.ObjectId
+  userId                String              @db.ObjectId
+  user                  User                @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
+  notificationType      NotificationType
+  title                 String
+  message               String
+  
+  relatedEntityId       String?             // Case ID, Invoice ID, etc.
+  relatedEntityType     String?             // "CASE", "INVOICE", "APPOINTMENT", etc.
+  
+  priority              Priority            @default(NORMAL)
+  isRead                Boolean             @default(false)
+  readAt                DateTime?
+  
+  notificationChannels  String?             // JSON array: ["PORTAL", "EMAIL", "SMS"]
+  emailSent             Boolean             @default(false)
+  smsSent               Boolean             @default(false)
+  
+  createdAt             DateTime            @default(now())
+}
+
+// ============ AUDIT & LOGGING ============
+model AuditLog {
+  id                    String              @id @default(auto()) @map("_id") @db.ObjectId
+  
+  userId                String              @db.ObjectId
+  user                  User                @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
+  action                String
+  entityType            String
+  entityId              String
+  details               String?             // JSON string
+  
+  caseId                String?             @db.ObjectId
+  case                  Case?               @relation(fields: [caseId], references: [id], onDelete: SetNull)
+  
+  ipAddress             String?
+  userAgent             String?
+  
+  createdAt             DateTime            @default(now())
+}
+
+// ============ ENUMS ============
 enum Role {
+  SUPER_ADMIN
   ADMIN
+  LAWYER
+  ACCOUNTANT
   CLIENT
 }
 
-enum DocStatus {
-  PENDING_REVIEW
-  VERIFIED
-  REJECTED
+enum CaseType {
+  CIVIL
+  CRIMINAL
+  TAXATION
+  CORPORATE
+  IT_DISPUTE
 }
 
-enum ApptStatus {
+enum CaseStatus {
+  PENDING
+  ACTIVE
+  HEARING
+  WON
+  LOST
+  CLOSED
+  APPEAL
+}
+
+enum HearingStatus {
+  SCHEDULED
+  COMPLETED
+  POSTPONED
+  CANCELLED
+  ADJOURNED
+}
+
+enum TaxRecordType {
+  INCOME_TAX
+  SALES_TAX
+  SECP_FILING
+  PRA_COMPLIANCE
+  EPADS_STATUS
+}
+
+enum TaxStatus {
+  ACTIVE
+  INACTIVE
+  SUSPENDED
+  DELINQUENT
+}
+
+enum ComplianceStatus {
+  PENDING
+  FILED
+  ACCEPTED
+  REJECTED
+  UNDER_REVIEW
+  DELINQUENT
+}
+
+enum DocumentType {
+  CNIC
+  NTN_CERTIFICATE
+  STRN_CERTIFICATE
+  BANK_STATEMENT
+  PROPERTY_DEED
+  COURT_ORDER
+  LEGAL_OPINION
+  PETITION
+  MEMORANDUM
+  ARTICLES_OF_ASSOCIATION
+  INCORPORATION_CERT
+  TAX_RETURN
+  FORM_A
+  FORM_21
+  FORM_29
+  OTHER
+}
+
+enum DocumentStatus {
+  ACTIVE
+  ARCHIVED
+  DELETED
+}
+
+enum InvoiceStatus {
+  DRAFT
+  PENDING
+  PARTIALLY_PAID
+  PAID
+  OVERDUE
+  CANCELLED
+}
+
+enum PaymentMethod {
+  BANK_TRANSFER
+  RAAST
+  CREDIT_CARD
+  DEBIT_CARD
+  DIGITAL_PAYMENT
+  CASH
+  CHEQUE
+}
+
+enum PaymentStatus {
+  PENDING
+  PROCESSING
+  COMPLETED
+  FAILED
+  REFUNDED
+}
+
+enum MessageType {
+  GENERAL
+  LEGAL_MATTER
+  TAX_INQUIRY
+  APPOINTMENT
+  NOTIFICATION
+}
+
+enum AppointmentType {
+  CONSULTATION
+  COURT_APPEARANCE
+  DOCUMENT_REVIEW
+  TAX_PLANNING
+  VIDEO_CALL
+  IN_PERSON
+}
+
+enum AppointmentStatus {
   PENDING
   CONFIRMED
   COMPLETED
   CANCELLED
+  RESCHEDULED
+}
+
+enum NotificationType {
+  HEARING_REMINDER
+  DEADLINE_ALERT
+  TAX_FILING_DUE
+  INVOICE_GENERATED
+  DOCUMENT_UPLOADED
+  MESSAGE_RECEIVED
+  APPOINTMENT_REMINDER
+  CASE_UPDATE
+  COURT_ORDER
+  TAX_NOTICE
+  SECP_NOTICE
+  PAYMENT_REMINDER
+  COMPLIANCE_ALERT
+}
+
+enum Priority {
+  LOW
+  NORMAL
+  MEDIUM
+  HIGH
+  URGENT
 }
