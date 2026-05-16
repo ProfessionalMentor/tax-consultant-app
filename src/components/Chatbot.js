@@ -87,14 +87,14 @@ export default function Chatbot() {
             <form onSubmit={handleSubmit} className="p-4 bg-midnight border-t border-slate-800">
               <div className="relative flex items-center">
                 <input
-                  value={input}
+                  value={input || ''}
                   onChange={handleInputChange}
                   placeholder="Ask about SECP, FBR, or Law..."
                   className="w-full bg-slate-900 border border-slate-700 rounded-full py-3 px-5 pr-12 text-sm text-white focus:outline-none focus:border-cyan focus:ring-1 focus:ring-cyan transition-all placeholder:text-slate-500"
                 />
                 <button
                   type="submit"
-                  disabled={isLoading || !input.trim()}
+                  disabled={isLoading || !input?.trim()}
                   className="absolute right-2 p-2 bg-cyan text-midnight rounded-full disabled:opacity-50 disabled:cursor-not-allowed hover:scale-105 transition-transform shadow-[0_0_10px_rgba(14,165,233,0.3)]"
                 >
                   <Send className="w-4 h-4 ml-[2px]" />

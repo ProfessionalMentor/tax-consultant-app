@@ -3,6 +3,8 @@ export const metadata = {
   description: "Book an appointment or contact our legal team for expert advice.",
 };
 
+import ContactForm from '@/components/ContactForm';
+
 export default function ContactPage() {
   return (
     <div className="pt-32 pb-24 bg-[#0a0f1c] min-h-screen relative overflow-hidden">
@@ -45,30 +47,7 @@ export default function ContactPage() {
           <div className="bg-[#040814]/80 backdrop-blur-md p-8 rounded-3xl shadow-[0_0_40px_rgba(0,0,0,0.5)] border border-white/10 relative">
             <div className="absolute inset-0 bg-linear-to-br from-white/5 to-transparent rounded-3xl pointer-events-none"></div>
             <h2 className="text-2xl font-bold text-white mb-6 relative z-10">Book a Consultation</h2>
-            
-            <form className="space-y-6 relative z-10 block">
-              <div>
-                <label htmlFor="name" className="block text-sm font-medium text-slate-300">Full Name</label>
-                <input type="text" id="name" className="mt-1 block w-full rounded-xl border-white/10 shadow-sm focus:border-gold focus:ring-gold bg-slate-900/50 py-3 px-4 text-white placeholder-slate-500 transition-colors" placeholder="Ali Raza" />
-              </div>
-              <div>
-                <label htmlFor="phone" className="block text-sm font-medium text-slate-300">Phone / WhatsApp</label>
-                <input type="tel" id="phone" className="mt-1 block w-full rounded-xl border-white/10 shadow-sm focus:border-gold focus:ring-gold bg-slate-900/50 py-3 px-4 text-white placeholder-slate-500 transition-colors" placeholder="+92 300 1234567" />
-              </div>
-              <div>
-                <label htmlFor="service" className="block text-sm font-medium text-slate-300">Required Service</label>
-                <select id="service" className="mt-1 block w-full rounded-xl border-white/10 shadow-sm focus:border-gold focus:ring-gold bg-slate-900/50 py-3 px-4 text-white transition-colors appearance-none">
-                  <option className="bg-slate-900">Filer / Income Tax Return</option>
-                  <option className="bg-slate-900">SECP Company Registration</option>
-                  <option className="bg-slate-900">Sales Tax / SRB Registration</option>
-                  <option className="bg-slate-900">Legal Advisory & Drafting</option>
-                  <option className="bg-slate-900">Other</option>
-                </select>
-              </div>
-              <button type="button" className="w-full flex justify-center py-4 px-4 border border-transparent rounded-xl shadow-[0_0_20px_rgba(212,168,64,0.2)] text-lg font-bold text-[#040814] bg-linear-to-r from-gold to-[#c59628] hover:from-[#e3b850] hover:to-gold focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-[#0a0f1c] focus:ring-gold transition-all transform hover:-translate-y-1">
-                Request Appointment
-              </button>
-            </form>
+            <ContactForm />
           </div>
         </div>
         
