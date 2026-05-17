@@ -54,8 +54,8 @@ export default function ServiceLayout({ title, subtitle, features, content, ctaT
               
               <div className="mt-8 border-t border-white/10 pt-6">
                 <p className="text-sm text-slate-400">Or speak directly to our experts:</p>
-                <a href="tel:+923000000000" className="mt-2 text-xl font-bold text-gold block hover:text-white transition-colors">
-                  +92 (300) 000-0000
+                <a href="tel:+923224760050" className="mt-2 text-xl font-bold text-gold block hover:text-white transition-colors">
+                  +92 322 4760050
                 </a>
               </div>
             </div>

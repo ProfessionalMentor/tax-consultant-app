@@ -35,7 +35,7 @@ export default function ContactPage() {
                 </div>
                 <div className="ml-5 mt-1">
                   <h3 className="text-lg font-bold text-white group-hover:text-emerald-400 transition-colors">Contact Number</h3>
-                  <p className="mt-1 text-slate-400">+92 300 0000000<br/>(Mon - Fri, 9am - 6pm)</p>
+                  <p className="mt-1 text-slate-400">+92 322 4760050<br/>(Mon - Fri, 9am - 6pm)</p>
                 </div>
               </div>
             </div>

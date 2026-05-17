@@ -8,6 +8,11 @@ export const metadata = {
   description: "Premium Tax, FBR, and SECP corporate legal consulting for individuals and businesses across Pakistan.",
 };
 
+export const viewport = {
+  width: 'device-width',
+  initialScale: 1
+};
+
 export default function RootLayout({ children }) {
   return (
     <html

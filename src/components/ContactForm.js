@@ -36,7 +36,7 @@ export default function ContactForm() {
       
       // 2. Open WhatsApp anyway (for instant advocate attention)
       const message = `*New Consultation Request*%0A%0A*Name:* ${formData.name}%0A*Phone:* ${formData.phone}%0A*Service Required:* ${formData.service}`;
-      const whatsappNumber = "923004882260"; // Verified advocate mobile
+      const whatsappNumber = "923224760050"; // Verified advocate mobile
       window.open(`https://wa.me/${whatsappNumber}?text=${message}`, '_blank');
 
       if (res.ok) {
@@ -77,7 +77,7 @@ export default function ContactForm() {
           value={formData.phone}
           onChange={handleChange}
           className="mt-1 block w-full rounded-xl border-white/10 shadow-sm focus:border-gold focus:ring-gold bg-slate-900/50 py-3 px-4 text-white placeholder-slate-500 transition-colors" 
-          placeholder="+92 300 1234567" 
+          placeholder="+92 322 4760050" 
         />
       </div>
       <div>

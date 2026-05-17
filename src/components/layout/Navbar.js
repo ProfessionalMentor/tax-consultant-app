@@ -51,8 +51,51 @@ export default function Navbar() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  useEffect(() => {
+    if (mobileMenuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [mobileMenuOpen]);
+
+  useEffect(() => {
+    if (!mobileMenuOpen) return;
+    const onKey = (e) => {
+      if (e.key === 'Escape') setMobileMenuOpen(false);
+    };
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, [mobileMenuOpen]);
+
   const isDashboard = pathname.startsWith('/admin') || pathname.startsWith('/lawyer') || pathname.startsWith('/client') || pathname.startsWith('/dashboard');
   if (isDashboard) return null;
+
+  const mobileNav = navItems.map((item, i) => (
+    <motion.div
+      key={i}
+      initial={{ opacity: 0, x: -20 }}
+      animate={{ opacity: 1, x: 0 }}
+      transition={{ delay: 0.1 + (i * 0.1) }}
+      className="flex flex-col border-b border-white/5 pb-4 last:border-0 last:pb-0"
+    >
+      <Link href={item.href} onClick={() => setMobileMenuOpen(false)} className="text-2xl font-black text-white py-2 tracking-tight">
+        {item.name}
+      </Link>
+      {item.dropdown && (
+        <div className="flex flex-col gap-3 mt-3 pl-4 border-l-2 border-white/5">
+          {item.dropdown.map((dropItem, j) => (
+            <Link key={j} href={dropItem.href} onClick={() => setMobileMenuOpen(false)} className="text-[17px] font-semibold text-slate-400 hover:text-gold transition-colors block">
+              {dropItem.name}
+            </Link>
+          ))}
+        </div>
+      )}
+    </motion.div>
+  ));
 
   return (
     <>
@@ -62,8 +105,8 @@ export default function Navbar() {
         transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
         className={`fixed w-full z-50 transition-all duration-500 rounded-b-2xl md:rounded-b-3xl ${
           isScrolled 
-            ? 'bg-[#040814]/85 backdrop-blur-2xl border-b border-white/5 shadow-[0_10px_40px_rgba(0,0,0,0.3)] py-3 lg:py-4' 
-            : 'bg-transparent py-5 lg:py-6'
+            ? 'bg-[#040814]/85 backdrop-blur-2xl border-b border-white/5 shadow-[0_10px_40px_rgba(0,0,0,0.3)] py-2 lg:py-4' 
+            : 'bg-transparent py-3 lg:py-6'
         }`}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -71,12 +114,12 @@ export default function Navbar() {
             
             {/* Logo area */}
             <Link href="/" className="flex items-center gap-3 lg:gap-4 group z-50">
-              <div className="relative flex items-center justify-center w-10 h-10 lg:w-12 lg:h-12 rounded-xl bg-linear-to-br from-slate-800 to-slate-950 border border-slate-700/50 shadow-inner overflow-hidden group-hover:border-gold/50 transition-all duration-300">
+              <div className="relative flex items-center justify-center w-9 h-9 lg:w-12 lg:h-12 rounded-xl bg-linear-to-br from-slate-800 to-slate-950 border border-slate-700/50 shadow-inner overflow-hidden group-hover:border-gold/50 transition-all duration-300">
                 <div className="absolute inset-0 bg-gold/20 opacity-0 group-hover:opacity-100 blur-xl transition-opacity duration-500" />
                 <Scale className="text-gold w-5 h-5 lg:w-6 lg:h-6 group-hover:scale-110 group-hover:rotate-12 transition-all duration-300 relative z-10" />
               </div>
               <div className="flex flex-col justify-center">
-                <span className="font-extrabold text-lg lg:text-2xl tracking-tighter text-white leading-none">
+                <span className="font-extrabold text-base lg:text-2xl tracking-tighter text-white leading-none">
                   Digital Law
                 </span>
                 <span className="text-[9px] lg:text-[10px] font-bold text-cyan mt-1 uppercase tracking-[0.2em] lg:tracking-[0.3em] leading-none">
@@ -206,12 +249,13 @@ export default function Navbar() {
 
             {/* Mobile Menu Toggle */}
             <div className="lg:hidden flex items-center gap-3">
-              <Link href="/contact" className="text-xs font-bold bg-gold/10 text-gold hover:bg-gold/20 hover:text-white transition-all border border-gold/30 px-4 py-2 rounded-full shadow-[0_0_15px_rgba(197,150,40,0.15)]">
+              <Link href="/contact" className="text-xs font-bold bg-gold/10 text-gold hover:bg-gold/20 hover:text-white transition-all border border-gold/30 px-4 py-2 rounded-full shadow-[0_0_15px_rgba(197,150,40,0.15)] pointer-events-auto z-50">
                 Consult
               </Link>
               <button
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                className="relative z-50 text-white focus:outline-none p-2.5 bg-white/5 rounded-full border border-white/10 hover:bg-white/10 transition-colors"
+                  aria-expanded={mobileMenuOpen}
+                  className="relative z-50 text-white focus:outline-none p-2.5 bg-white/5 rounded-full border border-white/10 hover:bg-white/10 transition-colors"
                 aria-label="Toggle menu"
               >
                 {mobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
@@ -229,41 +273,19 @@ export default function Navbar() {
             animate={{ opacity: 1, backdropFilter: "blur(20px)" }}
             exit={{ opacity: 0, backdropFilter: "blur(0px)" }}
             transition={{ duration: 0.3 }}
-            className="fixed inset-0 z-40 bg-[#040814]/95 pt-28 px-6 pb-6 overflow-y-auto"
+              className="fixed inset-0 z-60 bg-[#040814]/95 pt-20 px-4 pb-6 overflow-y-auto"
+            onClick={() => setMobileMenuOpen(false)}
           >
-            <div className="flex flex-col gap-6 h-full max-w-sm mx-auto">
+            <div className="flex flex-col gap-6 h-full max-w-sm mx-auto" onClick={(e) => e.stopPropagation()}>
+                <button
+                onClick={() => setMobileMenuOpen(false)}
+                aria-label="Close menu"
+                className="absolute top-6 right-6 z-70 p-2.5 rounded-full bg-white/5 text-white hover:bg-white/10"
+              >
+                <X size={18} />
+              </button>
               <div className="flex flex-col gap-4">
-                {navItems.map((item, i) => (
-                  <motion.div 
-                    initial={{ opacity: 0, x: -20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: 0.1 + (i * 0.1) }}
-                    key={i} 
-                    className="flex flex-col border-b border-white/5 pb-4 last:border-0 last:pb-0"
-                  >
-                  <Link 
-                    href={item.href}
-                    onClick={() => setMobileMenuOpen(false)}
-                    className="text-2xl font-black text-white py-2 tracking-tight"
-                  >
-                      {item.name}
-                    </Link>
-                    {item.dropdown && (
-                      <div className="flex flex-col gap-3 mt-3 pl-4 border-l-2 border-white/5">
-                        {item.dropdown.map((dropItem, j) => (
-                          <Link 
-                            key={j}
-                            href={dropItem.href}
-                            onClick={() => setMobileMenuOpen(false)}
-                            className="text-[17px] font-semibold text-slate-400 hover:text-gold transition-colors block"
-                          >
-                            {dropItem.name}
-                          </Link>
-                        ))}
-                      </div>
-                    )}
-                  </motion.div>
-                ))}
+                {mobileNav}
               </div>
 
               <motion.div 

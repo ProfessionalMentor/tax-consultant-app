@@ -27,7 +27,7 @@ export default function AboutPage() {
             Our Legal & Tax Advocates
           </h2>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
             {/* Profile 1: Ahmad Raza */}
             <div className="bg-linear-to-br from-[#1a130b] via-black to-black backdrop-blur-md rounded-3xl p-8 relative overflow-hidden group hover:shadow-[0_0_30px_rgba(212,168,64,0.15)] hover:border-gold/30 border border-white/5 transition-all duration-300">
               <div className="absolute top-0 right-0 p-8 opacity-10 text-gold group-hover:scale-110 group-hover:rotate-12 transition-transform duration-500">
@@ -69,6 +69,29 @@ export default function AboutPage() {
                   <ul className="grid grid-cols-2 gap-3 text-sm font-bold text-slate-400">
                     <li className="flex items-center"><Award className="w-4 h-4 mr-2 text-emerald-400" /> High Court Advocate</li>
                     <li className="flex items-center"><Shield className="w-4 h-4 mr-2 text-emerald-400" /> 5-7 Years Exp</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            {/* Profile 3: Muhammad Sajawal Raza Butt */}
+            <div className="bg-linear-to-br from-[#12131e] via-black to-black backdrop-blur-md rounded-3xl p-8 border border-white/5 shadow-lg relative overflow-hidden group hover:shadow-[0_0_30px_rgba(96,165,250,0.15)] hover:border-sky-500/30 transition-all duration-300">
+              <div className="absolute top-0 right-0 p-8 opacity-10 text-sky-500 group-hover:-rotate-12 group-hover:scale-110 transition-transform duration-500">
+                <Briefcase className="w-48 h-48" />
+              </div>
+              <div className="relative z-10 text-white">
+                <div className="w-20 h-20 rounded-2xl bg-black border border-sky-500/30 flex items-center justify-center text-3xl font-bold mb-6 text-sky-400 shadow-lg shadow-sky-500/10">
+                  MSB
+                </div>
+                <h3 className="text-3xl font-extrabold mb-2">Muhammad Sajawal Raza Butt</h3>
+                <p className="text-sky-400 font-medium tracking-wide mb-6">ACCA Member & Tax Advisor</p>
+                <div className="space-y-4">
+                  <div className="bg-black/50 p-4 rounded-xl border border-white/5">
+                    <p className="text-sm text-slate-300">Qualified ACCA member delivering expert accounting, tax compliance, and audit-prepared corporate reporting for high-value clients.</p>
+                  </div>
+                  <ul className="grid grid-cols-2 gap-3 text-sm font-medium text-slate-400">
+                    <li className="flex items-center"><Award className="w-4 h-4 mr-2 text-sky-400" /> ACCA Member</li>
+                    <li className="flex items-center"><Briefcase className="w-4 h-4 mr-2 text-sky-400" /> Tax & Compliance</li>
                   </ul>
                 </div>
               </div>
