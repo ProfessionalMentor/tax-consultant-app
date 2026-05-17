@@ -7,7 +7,7 @@ import {
   Scale, Briefcase, Calendar, ShieldCheck, Mail, FileText, 
   MessageSquare, User, LogOut, CheckCircle, Clock, AlertCircle, 
   Plus, Search, ArrowRight, Eye, RefreshCw, Paperclip, Send, 
-  Globe, Phone, Gavel, UserCheck
+  Globe, Phone, Gavel, UserCheck, Menu, X
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -16,6 +16,7 @@ export default function LawyerDashboard() {
   const [status, setStatus] = useState("loading");
   const router = useRouter();
   const [activeTab, setActiveTab] = useState("overview");
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   // State for data
   const [cases, setCases] = useState([]);
@@ -393,25 +394,44 @@ export default function LawyerDashboard() {
     : [];
 
   return (
-    <div className="flex h-screen bg-[#02050e] overflow-hidden">
+    <div className="flex h-screen bg-[#02050e] overflow-hidden relative">
       
+      {/* Backdrop overlay for mobile screen drawer */}
+      {isSidebarOpen && (
+        <div 
+          onClick={() => setIsSidebarOpen(false)} 
+          className="fixed inset-0 bg-black/60 z-30 lg:hidden backdrop-blur-sm transition-all duration-300"
+        />
+      )}
+
       {/* ===================== SIDEBAR ===================== */}
-      <aside className="w-80 bg-slate-950/60 backdrop-blur-2xl border-r border-slate-900 flex flex-col justify-between shrink-0 relative z-30">
+      <aside className={`fixed inset-y-0 left-0 w-80 bg-slate-950/95 backdrop-blur-3xl border-r border-slate-900 flex flex-col justify-between shrink-0 z-40 transform transition-all duration-300 ease-in-out lg:relative lg:translate-x-0 ${
+        isSidebarOpen ? "translate-x-0 shadow-[5px_0_30px_rgba(0,0,0,0.8)]" : "-translate-x-full lg:translate-x-0"
+      }`}>
         
         {/* Glow Element */}
         <div className="absolute top-0 left-0 w-full h-32 bg-gold/5 rounded-full blur-[60px] pointer-events-none"></div>
 
         <div>
           {/* Logo & Brand Header */}
-          <div className="p-8 border-b border-slate-900/60 flex items-center gap-4">
-            <div className="w-12 h-12 rounded-xl bg-black border border-gold/40 flex items-center justify-center shadow-lg relative overflow-hidden">
-              <div className="absolute inset-0 bg-gold/10 animate-pulse"></div>
-              <Scale className="text-gold w-6 h-6 relative z-10" />
+          <div className="p-8 border-b border-slate-900/60 flex items-center justify-between gap-4">
+            <div className="flex items-center gap-4">
+              <div className="w-12 h-12 rounded-xl bg-black border border-gold/40 flex items-center justify-center shadow-lg relative overflow-hidden">
+                <div className="absolute inset-0 bg-gold/10 animate-pulse"></div>
+                <Scale className="text-gold w-6 h-6 relative z-10" />
+              </div>
+              <div>
+                <span className="font-extrabold text-xl tracking-tight text-white block leading-none">Command</span>
+                <span className="text-[10px] font-bold text-cyan uppercase tracking-widest block mt-1.5">Advocate Portal</span>
+              </div>
             </div>
-            <div>
-              <span className="font-extrabold text-xl tracking-tight text-white block leading-none">Command</span>
-              <span className="text-[10px] font-bold text-cyan uppercase tracking-widest block mt-1.5">Advocate Portal</span>
-            </div>
+            {/* Sidebar drawer close button on mobile */}
+            <button 
+              onClick={() => setIsSidebarOpen(false)}
+              className="lg:hidden p-2 text-slate-500 hover:text-white rounded-xl hover:bg-slate-900 transition-colors"
+            >
+              <X className="w-5 h-5" />
+            </button>
           </div>
 
           {/* Navigation Links */}
@@ -426,7 +446,10 @@ export default function LawyerDashboard() {
             ].map(item => (
               <button
                 key={item.id}
-                onClick={() => setActiveTab(item.id)}
+                onClick={() => {
+                  setActiveTab(item.id);
+                  setIsSidebarOpen(false);
+                }}
                 className={`w-full flex items-center justify-between px-4 py-3.5 rounded-xl text-sm font-semibold transition-all relative ${
                   activeTab === item.id 
                     ? "text-[#02050e] bg-linear-to-r from-gold to-[#c59628] shadow-[0_0_20px_rgba(197,150,40,0.25)] font-black" 
@@ -474,10 +497,19 @@ export default function LawyerDashboard() {
         <div className="absolute top-0 right-1/4 w-[600px] h-[600px] bg-cyan/5 rounded-full blur-[140px] pointer-events-none z-0"></div>
 
         {/* Header bar */}
-        <header className="h-20 bg-slate-950/20 backdrop-blur-md border-b border-slate-900 flex justify-between items-center px-10 relative z-20 shrink-0">
-          <div>
-            <h1 className="text-2xl font-black text-white tracking-tight uppercase">Chamber Command Center</h1>
-            <p className="text-xs text-slate-500 font-bold mt-1">Live Firm Supervision & Secure File Operations</p>
+        <header className="h-20 bg-slate-950/20 backdrop-blur-md border-b border-slate-900 flex justify-between items-center px-6 md:px-10 relative z-20 shrink-0">
+          <div className="flex items-center gap-3">
+            {/* Sidebar toggle button for mobile */}
+            <button 
+              onClick={() => setIsSidebarOpen(true)}
+              className="lg:hidden p-2.5 bg-slate-900/60 border border-slate-800 rounded-xl text-slate-400 hover:text-white"
+            >
+              <Menu className="w-5 h-5" />
+            </button>
+            <div>
+              <h1 className="text-lg md:text-2xl font-black text-white tracking-tight uppercase leading-none">Chamber Command Center</h1>
+              <p className="text-[9px] md:text-xs text-slate-500 font-bold mt-1.5">Live Firm Supervision & Secure File Operations</p>
+            </div>
           </div>
           <div className="flex items-center gap-4">
             <button 
@@ -486,15 +518,15 @@ export default function LawyerDashboard() {
             >
               <RefreshCw className="w-4 h-4" />
             </button>
-            <div className="flex items-center gap-2 px-4 py-2.5 bg-slate-900/40 rounded-xl border border-slate-850">
-              <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></span>
-              <span className="text-xs font-bold text-slate-400 uppercase tracking-widest">Vault Active</span>
+            <div className="flex items-center gap-2 px-3 py-2 bg-slate-900/40 rounded-xl border border-slate-850 shrink-0">
+              <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+              <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest hidden sm:inline">Vault Active</span>
             </div>
           </div>
         </header>
 
         {/* Tab view slot */}
-        <main className="flex-1 overflow-y-auto p-10 relative z-10">
+        <main className="flex-1 overflow-y-auto p-4 md:p-10 relative z-10">
           <AnimatePresence mode="wait">
             <motion.div
               key={activeTab}
@@ -1463,7 +1495,9 @@ export default function LawyerDashboard() {
                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 h-[calc(100vh-200px)] overflow-hidden">
                   
                   {/* Conversations Sidebar */}
-                  <div className="lg:col-span-1 bg-slate-900/40 border border-slate-900 rounded-3xl p-6 overflow-y-auto space-y-4">
+                  <div className={`lg:col-span-1 bg-slate-900/40 border border-slate-900 rounded-3xl p-6 overflow-y-auto space-y-4 ${
+                    selectedClient ? "hidden lg:block" : "block"
+                  }`}>
                     <h3 className="text-sm font-bold text-slate-500 uppercase tracking-widest mb-4">Active Clients</h3>
                     <div className="space-y-2">
                       {conversations.length === 0 ? (
@@ -1484,7 +1518,7 @@ export default function LawyerDashboard() {
                               <p className="text-xs text-slate-400 truncate mt-1">{conv.lastMessage?.content || "No messages yet"}</p>
                             </div>
                             {conv.unreadCount > 0 && (
-                              <span className="bg-cyan text-slate-950 text-[10px] font-black px-2 py-0.5 rounded-full shadow-[0_0_10px_rgba(6,182,212,0.3)]">
+                              <span className="bg-cyan text-slate-950 text-[10px] font-black px-2 py-0.5 rounded-full shadow-[0_0_10px_rgba(6,182,212,0.3)] shrink-0">
                                 {conv.unreadCount}
                               </span>
                             )}
@@ -1495,27 +1529,37 @@ export default function LawyerDashboard() {
                   </div>
 
                   {/* Chat Area */}
-                  <div className="lg:col-span-2 bg-slate-900/40 border border-slate-900 rounded-3xl shadow-2xl flex flex-col justify-between overflow-hidden">
+                  <div className={`lg:col-span-2 bg-slate-900/40 border border-slate-900 rounded-3xl shadow-2xl flex flex-col justify-between overflow-hidden ${
+                    selectedClient ? "flex" : "hidden lg:flex"
+                  }`}>
                     {!selectedClient ? (
-                      <div className="flex-1 flex flex-col items-center justify-center text-slate-500">
+                      <div className="flex-1 flex flex-col items-center justify-center text-slate-500 p-6 text-center">
                         <MessageSquare className="w-12 h-12 text-slate-800 mb-4 animate-pulse" />
                         Select a client thread from the list to start messaging.
                       </div>
                     ) : (
                       <>
                         {/* Chat Header */}
-                        <div className="px-8 py-5 border-b border-slate-950 bg-slate-950/20 flex justify-between items-center shrink-0">
-                          <div>
-                            <h4 className="font-bold text-white text-base leading-none">{selectedClient.name}</h4>
-                            <span className="text-[10px] font-bold text-cyan uppercase tracking-widest mt-2 block">Direct Counsel Link</span>
+                        <div className="px-6 md:px-8 py-5 border-b border-slate-950 bg-slate-950/20 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 shrink-0">
+                          <div className="flex items-center gap-3">
+                            <button 
+                              onClick={() => setSelectedClient(null)}
+                              className="lg:hidden p-2 bg-slate-900 hover:bg-slate-800 border border-slate-850 rounded-xl text-slate-400 hover:text-white"
+                            >
+                              <ArrowRight className="w-4 h-4 rotate-180" />
+                            </button>
+                            <div>
+                              <h4 className="font-bold text-white text-base leading-none">{selectedClient.name}</h4>
+                              <span className="text-[10px] font-bold text-cyan uppercase tracking-widest mt-2 block">Direct Counsel Link</span>
+                            </div>
                           </div>
-                          <span className="text-[10px] font-bold px-3 py-1 bg-slate-950 border border-slate-850 text-gold rounded-full uppercase tracking-wider">
+                          <span className="text-[10px] font-bold px-3 py-1 bg-slate-950 border border-slate-850 text-gold rounded-full uppercase tracking-wider shrink-0">
                             SECURE CHANNEL
                           </span>
                         </div>
 
                         {/* Chat Messages */}
-                        <div className="flex-1 overflow-y-auto p-8 space-y-6">
+                        <div className="flex-1 overflow-y-auto p-4 md:p-8 space-y-6">
                           {activeChatHistory.length === 0 ? (
                             <div className="text-center text-slate-500 text-xs">No messages recorded in this secure channel.</div>
                           ) : (
@@ -1523,12 +1567,12 @@ export default function LawyerDashboard() {
                               const isMe = msg.senderId === session?.user?.id;
                               return (
                                 <div key={idx} className={`flex ${isMe ? "justify-end" : "justify-start"}`}>
-                                  <div className={`max-w-[70%] p-4 rounded-2xl text-sm border ${
+                                  <div className={`max-w-[85%] md:max-w-[70%] p-4 rounded-2xl text-sm border ${
                                     isMe 
                                       ? "bg-slate-950 text-slate-200 border-slate-800 rounded-tr-none" 
                                       : "bg-slate-900/80 text-slate-200 border-slate-850 rounded-tl-none"
                                   }`}>
-                                    <p className="leading-relaxed">{msg.content}</p>
+                                    <p className="leading-relaxed break-words">{msg.content}</p>
                                     <span className="text-[9px] text-slate-500 font-semibold block text-right mt-2 uppercase tracking-widest">
                                       {new Date(msg.createdAt).toLocaleTimeString()}
                                     </span>
@@ -1541,19 +1585,19 @@ export default function LawyerDashboard() {
                         </div>
 
                         {/* Chat input */}
-                        <form onSubmit={handleSendMessage} className="p-6 border-t border-slate-950 bg-slate-950/20 flex gap-4 shrink-0">
+                        <form onSubmit={handleSendMessage} className="p-4 md:p-6 border-t border-slate-950 bg-slate-950/20 flex gap-3 shrink-0">
                           <input 
                             type="text" 
                             placeholder="Type secure legal advisory message..."
                             value={newMessage}
                             onChange={(e) => setNewMessage(e.target.value)}
-                            className="flex-1 bg-slate-950 border border-slate-800 rounded-xl px-5 py-4 text-white text-sm focus:outline-none focus:border-gold transition-colors"
+                            className="flex-1 bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 md:px-5 md:py-4 text-white text-xs md:text-sm focus:outline-none focus:border-gold transition-colors"
                           />
                           <button 
                             type="submit"
-                            className="px-6 bg-gold hover:bg-gold/90 text-slate-950 rounded-xl font-bold flex items-center justify-center transition-colors shadow-lg"
+                            className="px-4 md:px-6 bg-gold hover:bg-gold/90 text-slate-950 rounded-xl font-bold flex items-center justify-center transition-colors shadow-lg"
                           >
-                            <Send className="w-5 h-5" />
+                            <Send className="w-4 h-4 md:w-5 md:h-5" />
                           </button>
                         </form>
                       </>
