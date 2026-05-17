@@ -59,22 +59,22 @@ export default function Hero() {
         >
           <motion.div variants={itemVariants} className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-slate-900/50 backdrop-blur-md border border-slate-800 text-sm font-semibold text-cyan mb-8 shadow-2xl">
             <ShieldCheck className="w-4 h-4" />
-            <span>Pakistan&apos;s Premier Trusted Corporate Law & Tax Experts</span>
+            <span>Trusted Legal Advocates & Tax Consultants</span>
           </motion.div>
 
           <motion.h1 
             variants={itemVariants}
             className="text-5xl md:text-7xl lg:text-8xl font-extrabold text-white tracking-tight leading-[1.1] mb-8"
           >
-            Pioneering <span className="text-transparent bg-clip-text bg-linear-to-r from-gold via-[#e3b850] to-gold background-animate">Legal Excellence</span> <br/>
-            & <span className="text-transparent bg-clip-text bg-linear-to-r from-cyan to-emerald-400">Tech Innovation</span>
+            Expert Legal Help <br/>
+            & <span className="text-transparent bg-clip-text bg-linear-to-r from-gold via-[#e3b850] to-gold background-animate">Easy Tax Solutions</span>
           </motion.h1>
           
           <motion.p 
             variants={itemVariants}
             className="text-xl md:text-2xl text-slate-400 md:max-w-3xl mx-auto leading-relaxed mb-10"
           >
-            From High Court Litigation to cutting-edge Digital SaaS. A powerful synergy protecting your corporate rights and digitizing your future.
+            We provide simple and professional services for Income Tax, Sales Tax, FBR, SECP, PRA, e-Payments, and Property Registry, along with expert Civil and Criminal litigation in the High Court, Session Courts, and Police Stations.
           </motion.p>
 
           <motion.div 

@@ -28,10 +28,10 @@ export default function Footer() {
           <div>
             <h4 className="text-white font-bold uppercase tracking-wider mb-6">Chamber Desks</h4>
             <ul className="space-y-4 text-slate-400">
-              <li><Link href="/services/litigation" className="hover:text-gold transition-colors flex items-center gap-2"><Gavel className="w-4 h-4" /> High Court Litigation</Link></li>
+              <li><Link href="/services/litigation" className="hover:text-gold transition-colors flex items-center gap-2"><Gavel className="w-4 h-4" /> Bail & High Court Litigation</Link></li>
               <li><Link href="/services/taxation" className="hover:text-emerald-400 transition-colors flex items-center gap-2"><Calculator className="w-4 h-4" /> FBR Tax Compliance</Link></li>
-              <li><Link href="/services/it-solutions" className="hover:text-cyan transition-colors">Next.js SaaS Tech</Link></li>
-              <li><Link href="/case-studies" className="hover:text-white transition-colors">Landmark Judgments</Link></li>
+              <li><Link href="/services/registry" className="hover:text-cyan transition-colors">Registry & Mutations</Link></li>
+              <li><Link href="/services/e-payments" className="hover:text-amber-400 transition-colors">e-Payments & e-PADS</Link></li>
             </ul>
           </div>
 
@@ -39,6 +39,7 @@ export default function Footer() {
             <h4 className="text-white font-bold uppercase tracking-wider mb-6">Quick Hub</h4>
             <ul className="space-y-4 text-slate-400">
               <li><Link href="/about" className="hover:text-white transition-colors">The Lead Advocates</Link></li>
+              <li><Link href="/portfolio" className="hover:text-white transition-colors">Tech & Law Portfolio</Link></li>
               <li><Link href="/tools" className="hover:text-white transition-colors">Tax Calculators</Link></li>
               <li><Link href="/resources" className="hover:text-white transition-colors">Compliance Guides</Link></li>
               <li><Link href="/careers" className="hover:text-white transition-colors">Join the Chamber</Link></li>

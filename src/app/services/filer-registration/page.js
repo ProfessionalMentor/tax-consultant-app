@@ -22,10 +22,10 @@ export default function FilerRegistrationPage() {
       </p>
       <h2 className="text-2xl font-bold text-slate-900 pt-4">Why File With Us?</h2>
       <p>
-        Our team of expert tax consultants and advocates ensures your wealth statement matches your income declarations flawlessly. We mitigate the risk of FBR audits and penalty notices by providing a highly meticulous review process before submission.
+        Our team of expert tax consultants ensures your wealth statement matches your income declarations perfectly. We review everything carefully to prevent any FBR audit or penalty notices.
       </p>
       <p>
-        We handle your IRIS credentials with utmost confidentiality. All documents (CNIC, Utility Bills, Salary Slips) are transmitted via our secure Client Dashboard, eliminating the risks of WhatsApp and email leaks.
+        We handle your FBR login credentials with the highest level of confidentiality. All your documents (CNIC, Utility Bills, Salary Slips) are kept completely secure and private.
       </p>
     </div>
   );

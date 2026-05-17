@@ -1,26 +1,51 @@
 @import "tailwindcss";
 
 @theme {
-  --color-midnight: #020617;
-  --color-gold: #A85507;
-  --color-cyan: #0EA5E9;
+  --color-midnight: #02040a;
+  --color-gold: #b89047;
+  --color-cyan: #06b6d4;
 }
 
 body {
-  background-color: var(--color-background);
-  color: var(--color-foreground);
+  background-color: #02050e;
+  color: #94a3b8;
   font-family: var(--font-sans), sans-serif;
+  overflow-x: hidden;
+}
+
+/* Custom Velvet Scrollbar Setup */
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: #02050e;
+}
+::-webkit-scrollbar-thumb {
+  background: #1e293b;
+  border-radius: 5px;
+  border: 2px solid #02050e;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #b89047;
+}
+
+/* Moving visual gradient accent animation */
+@keyframes bg-animate {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.background-animate {
+  background-size: 200% 200%;
+  animation: bg-animate 6s ease infinite;
 }
 
 /* Shadcn/UI Base Variables Setup */
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
-    --radius: 0.5rem;
-  }
-  .dark {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
+    --background: 224 71% 4%;
+    --foreground: 213 31% 91%;
+    --radius: 0.75rem;
   }
 }

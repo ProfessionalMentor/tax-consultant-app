@@ -7,22 +7,22 @@ export const metadata = {
 
 export default function LegalAdvisoryPage() {
   const features = [
-    "Partnership & Shareholder Agreements",
+    "Partnership & Business Agreements",
     "Employment Contracts & NDAs",
-    "Trust & NGO Deeds",
-    "Trademark & IP Registration",
-    "Civil & Corporate Litigation Consulting",
+    "Trusts, Foundations & NGO Deeds",
+    "Trademark & Brand Registrations",
+    "Civil & Corporate Legal Advice",
     "Succession & Inheritance Certificates"
   ];
 
   const content = (
     <div className="space-y-6">
       <p>
-        A single overlooked clause in a contract can cost millions in litigation. Our 20+ years of appellate court and corporate background allows us to draft bulletproof legal documents that protect your interests against unpredicted damages.
+        A clear and simple contract protects you from costly future disputes. Our legal team drafts complete, professional documents to secure your business and personal interests.
       </p>
-      <h2 className="text-2xl font-bold text-slate-900 pt-4">Proactive Defense is the Best Defense</h2>
+      <h2 className="text-2xl font-bold text-slate-900 pt-4">Professional Legal Advice</h2>
       <p>
-        We do not just react to notices; we structure your commercial operations so conflicts are minimized. From strict Non-Disclosure Agreements (NDAs) to complex vendor and tech-transfer contracts, we draft bespoke legal parameters for your precise business needs—rejecting flimsy templates.
+        We draft partnership deeds, trademark registrations, NGO registrations, and NDAs tailored exactly to your requirements, avoiding generic templates.
       </p>
       <p>
         Additionally, protecting your brand via IPO (Intellectual Property Office) trademarks and handling Trust/NGO registrations under the Societies Act are our specialized suites.
@@ -33,10 +33,10 @@ export default function LegalAdvisoryPage() {
   return (
     <ServiceLayout
       title="Legal Advisory & Drafting"
-      subtitle="Fortify your business with airtight contracts, trademarks, and specialized legal advocacy."
+      subtitle="Professional drafting of business agreements, trademark registrations, and expert legal consultations."
       features={features}
       content={content}
-      ctaText="Request Legal Counsel"
+      ctaText="Request Legal Consultation"
     />
   );
 }

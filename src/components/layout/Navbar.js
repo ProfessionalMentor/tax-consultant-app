@@ -12,15 +12,17 @@ const navItems = [
     name: 'Services', 
     href: '/services',
     dropdown: [
-      { name: 'Litigation & Disputes', href: '/services/litigation' },
-      { name: 'Taxation & FBR', href: '/services/taxation' },
-      { name: 'SECP & Corporate', href: '/services/secp-company' },
-      { name: 'Legal Advisory', href: '/services/legal-advisory' },
-      { name: 'NTN & Sales Tax', href: '/services/ntn-sales-tax' },
-      { name: 'Filer Registration', href: '/services/filer-registration' },
-      { name: 'IT Solutions', href: '/services/it-solutions' }
+      { name: 'Bail & High Court Litigation', href: '/services/litigation' },
+      { name: 'FBR Audits & Compliance', href: '/services/taxation' },
+      { name: 'SECP Company Registration', href: '/services/secp-company' },
+      { name: 'Registry & Land Mutations', href: '/services/registry' },
+      { name: 'Sales Tax & PRA', href: '/services/ntn-sales-tax' },
+      { name: 'Income Tax & Filer', href: '/services/filer-registration' },
+      { name: 'e-Payments & e-PADS', href: '/services/e-payments' },
+      { name: 'Legal Advisory & Drafting', href: '/services/legal-advisory' }
     ]
   },
+  { name: 'Portfolio', href: '/portfolio' },
   { 
     name: 'Resources', 
     href: '#',

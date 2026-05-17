@@ -20,12 +20,12 @@ export default function NTNSalesTaxPage() {
       <p>
         Registering your business for an NTN (National Tax Number) is your first formal step toward legal commercial operations in Pakistan. Furthermore, for manufacturing and large-scale providers, Sales Tax verification is non-negotiable.
       </p>
-      <h2 className="text-2xl font-bold text-slate-900 pt-4">Cross-Provincial Sales Tax Compliance</h2>
+      <h2 className="text-2xl font-bold text-slate-900 pt-4">Provincial Sales Tax & PRA Help</h2>
       <p>
-        Tax laws vary drastically between provinces (Sindh Revenue Board SRB, Punjab Revenue Authority PRA, KPRA, and BRA). We identify exactly what category your specialized service falls under, limiting your liabilities and correctly matching your input-output taxes.
+        Sales tax rules differ depending on your location and business type, such as Punjab Revenue Authority (PRA). We handle your registration, monthly sales tax filings, and provincial authority alignment perfectly.
       </p>
       <p>
-        For e-commerce and retail integration, we assist with FBR POS (Point of Sale) integration and ensuring you benefit from reduced tier regulations.
+        We make sure you pay the correct taxes while avoiding extra penalties, keeping your business running without any compliance issues.
       </p>
     </div>
   );

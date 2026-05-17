@@ -17,17 +17,17 @@ export default function AboutPage() {
         {/* Vision & History */}
         <div className="text-center max-w-3xl mx-auto mb-20 animate-fade-in-up">
           <h1 className="text-4xl md:text-5xl font-extrabold text-white tracking-tight mb-6">
-            The Digital <span className="text-transparent bg-clip-text bg-linear-to-r from-gold to-[#e3b850]">Law Chamber</span>
+            About Our <span className="text-transparent bg-clip-text bg-linear-to-r from-gold to-[#e3b850]">Law Chamber</span>
           </h1>
           <p className="text-xl text-slate-400 leading-relaxed">
-            Where traditional legal authority meets Silicon Valley technological innovation. We offer a unified shield for your corporate, civil, criminal, and IT developmental rights.
+            We provide professional and approachable legal advice combined with complete tax consultation. Our goal is to make it easy for you to handle your court cases and stay 100% compliant.
           </p>
         </div>
 
         {/* Lead Advocates Profile Bento Grid */}
         <div className="mb-24">
           <h2 className="text-3xl font-bold text-center text-white mb-12 border-b border-white/10 pb-4 inline-block mx-auto">
-            Our High Court Legal Tier
+            Our Legal & Tax Advocates
           </h2>
           
           <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
@@ -41,14 +41,14 @@ export default function AboutPage() {
                   AR
                 </div>
                 <h3 className="text-3xl font-extrabold mb-2">Advocate Ahmad Raza</h3>
-                <p className="text-cyan font-medium tracking-wide mb-6">High Court Specialist (Civil & Tech Crimes)</p>
+                <p className="text-cyan font-medium tracking-wide mb-6">Senior Counsel (Civil Litigation & FBR/SECP Tax)</p>
                 <div className="space-y-4">
                   <div className="bg-[#0a0f1c]/50 p-4 rounded-xl border border-white/5">
-                    <p className="text-sm text-slate-300">With decades of strategic mastery bridging the gap between high-level civil litigation and modern corporate IT compliance. Trusted for multi-million rupee dispute resolutions.</p>
+                    <p className="text-sm text-slate-300">Over 15 years of experience specializing in Lahore High Court civil property disputes, land registries ("Registryan"), mutations ("Inteqal"), FBR corporate tax filings, and SECP company registration.</p>
                   </div>
                   <ul className="grid grid-cols-2 gap-3 text-sm font-medium text-slate-400">
                     <li className="flex items-center"><Award className="w-4 h-4 mr-2 text-gold" /> High Court Advocate</li>
-                    <li className="flex items-center"><Briefcase className="w-4 h-4 mr-2 text-gold" /> Cyber Law Expert</li>
+                    <li className="flex items-center"><Briefcase className="w-4 h-4 mr-2 text-gold" /> 15-20 Years Exp</li>
                   </ul>
                 </div>
               </div>
@@ -64,14 +64,14 @@ export default function AboutPage() {
                   KRB
                 </div>
                 <h3 className="text-3xl font-extrabold mb-2">Advocate Khalil ur Rehman Butt</h3>
-                <p className="text-emerald-400 font-medium tracking-wide mb-6">High Court Specialist (Criminal Defense)</p>
+                <p className="text-emerald-400 font-medium tracking-wide mb-6">Partner Advocate (Criminal Defense & Corporate Compliance)</p>
                 <div className="space-y-4">
                   <div className="bg-[#0a0f1c]/50 p-4 rounded-xl border border-white/5">
-                    <p className="text-sm text-slate-300">A formidable force in criminal defense across the High Courts of Pakistan. Renowned for strategic acquittal victories, unyielding perseverance, and uncompromising courtroom authority.</p>
+                    <p className="text-sm text-slate-300">Over 5 years of experience specializing in criminal defense, securing pre-arrest/post-arrest/protective bail from Lahore High Court and Session Courts, handling police station matters, and managing digital filings for PRA, SECP, and e-Payments.</p>
                   </div>
                   <ul className="grid grid-cols-2 gap-3 text-sm font-bold text-slate-400">
                     <li className="flex items-center"><Award className="w-4 h-4 mr-2 text-emerald-400" /> High Court Advocate</li>
-                    <li className="flex items-center"><Shield className="w-4 h-4 mr-2 text-emerald-400" /> Criminal Defense Pro</li>
+                    <li className="flex items-center"><Shield className="w-4 h-4 mr-2 text-emerald-400" /> 5-7 Years Exp</li>
                   </ul>
                 </div>
               </div>

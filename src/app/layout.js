@@ -7,6 +7,7 @@ export const metadata = {
   title: "Law & Tax Consultant Pakistan | FBR & SECP Experts",
   description: "Premium Tax, FBR, and SECP corporate legal consulting for individuals and businesses across Pakistan.",
 };
+
 export default function RootLayout({ children }) {
   return (
     <html
@@ -15,16 +16,14 @@ export default function RootLayout({ children }) {
       suppressHydrationWarning
     >
       <body className="min-h-full flex flex-col bg-[#040814] text-slate-200 overflow-x-hidden selection:bg-gold/30 selection:text-gold">
-        <>
-
-          <Navbar />
-          <main className="grow">
-            {children}
-          </main>
-          <Footer />
-          <Chatbot />
-        </>
+        <Navbar />
+        <main className="grow">
+          {children}
+        </main>
+        <Footer />
+        <Chatbot />
       </body>
     </html>
   );
 }
+

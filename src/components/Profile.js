@@ -1,103 +1,136 @@
 "use client";
 
-import Image from 'next/image';
 import { motion } from 'framer-motion';
-import { CheckCircle2, ArrowRight } from 'lucide-react';
+import { Award, ShieldAlert, CheckCircle2, ArrowRight } from 'lucide-react';
+import Link from 'next/link';
 
 export default function Profile() {
-  const bulletPoints = [
-    "Advocate High Court & Legal Advisor",
-    "Expert in FBR Tax Audits & Legal Drafting",
-    "SECP Corporate Consultant",
-    "Verified Success Record with Corporate Clients"
+  const razoPoints = [
+    "Advocate High Court - 15+ Years Exp",
+    "FBR Wealth Statement & Audit Expert",
+    "SECP Company Registration Specialist",
+    "Registry (Deed) & Mutation (Inteqal)"
+  ];
+
+  const buttPoints = [
+    "High Court Advocate - 5+ Years Exp",
+    "LHC & Session Court Criminal Defense",
+    "Pre-Arrest, Post-Arrest & Police Station Bail",
+    "PRA, Sales Tax & e-Payments Compliance"
   ];
 
   return (
-    <section className="py-24 bg-[#0a0f1c] relative overflow-hidden border-t border-white/5">
-      <div className="absolute left-0 bottom-0 w-[500px] h-[500px] bg-emerald-900/10 rounded-full blur-[120px] pointer-events-none -translate-x-1/2 translate-y-1/2"></div>
-      
+    <section className="py-24 bg-[#02050e] relative overflow-hidden border-t border-white/5">
+      {/* Decorative glows */}
+      <div className="absolute right-0 bottom-0 w-[500px] h-[500px] bg-cyan-900/5 rounded-full blur-[120px] pointer-events-none translate-x-1/2 translate-y-1/2"></div>
+      <div className="absolute left-0 top-0 w-[500px] h-[500px] bg-amber-900/5 rounded-full blur-[120px] pointer-events-none -translate-x-1/2 -translate-y-1/2"></div>
+ 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="lg:grid lg:grid-cols-2 lg:gap-16 items-center">
+        
+        {/* Title Header */}
+        <div className="text-center max-w-3xl mx-auto mb-20">
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-slate-900/60 backdrop-blur-md border border-slate-800 text-xs font-semibold text-cyan mb-4 shadow-lg">
+            <span>High Court Advocates & Corporate Advisors</span>
+          </div>
+          <h2 className="text-3xl leading-snug font-black tracking-tight text-white sm:text-4xl md:text-5xl">
+            Meet the <span className="text-transparent bg-clip-text bg-linear-to-r from-amber-500 via-[#e3b850] to-amber-500 background-animate">Lead Advocates</span>
+          </h2>
+          <p className="text-slate-400 text-sm md:text-base mt-4">
+            Our experienced legal force is ready to help you with expert court representation and professional tax management.
+          </p>
+        </div>
+ 
+        {/* Profiles Grid */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-stretch">
           
+          {/* Ahmad Raza Profile */}
           <motion.div 
-            initial={{ opacity: 0, x: -50 }}
+            initial={{ opacity: 0, x: -40 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.8, ease: "easeOut" }}
-            className="mb-16 lg:mb-0 relative"
+            transition={{ duration: 0.7 }}
+            className="flex flex-col bg-[#040814]/40 border border-white/5 hover:border-gold/30 rounded-3xl p-8 md:p-12 relative overflow-hidden group transition-all duration-500 shadow-2xl hover:shadow-[0_0_30px_rgba(212,168,64,0.05)]"
           >
-            <div className="aspect-w-3 aspect-h-4 bg-slate-900 rounded-3xl overflow-hidden shadow-2xl border border-white/10 relative">
-              <div className="absolute inset-0 bg-transparent group-hover:bg-cyan-900/10 transition-colors z-10" />
-              {/* Fallback space for an image since we don't have an asset yet */}
-              <div className="w-full h-96 lg:h-128 bg-linear-to-tr from-slate-900 via-slate-800 to-slate-900 flex flex-col items-center justify-center text-center p-6">
-                <div className="w-24 h-24 rounded-full bg-slate-800 border-2 border-gold/30 flex items-center justify-center mb-4 shadow-[0_0_15px_rgba(212,168,64,0.2)]">
-                  <span className="text-4xl">👨‍⚖️</span>
-                </div>
-                <span className="text-slate-400 font-medium text-lg">Professional Portrait Area</span>
-                <span className="text-sm text-slate-500 mt-2">Upload asset later</span>
-              </div>
+            <div className="absolute top-0 right-0 p-8 opacity-5 text-gold group-hover:scale-110 group-hover:rotate-12 transition-transform duration-500 pointer-events-none">
+              <Award className="w-56 h-56" />
             </div>
             
-            {/* Experience Badge */}
-            <motion.div 
-              animate={{ y: [0, -10, 0] }}
-              transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-              className="absolute -bottom-8 -right-8 lg:-right-12 bg-linear-to-br from-emerald-600 to-cyan-700 rounded-2xl p-6 shadow-2xl shadow-emerald-900/50 border border-emerald-400/20 text-white z-20 backdrop-blur-md"
-            >
-              <p className="text-4xl lg:text-5xl font-black drop-shadow-md">20+</p>
-              <p className="font-bold text-emerald-100 drop-shadow-sm uppercase tracking-wider text-sm mt-2">Years of<br/>Excellence</p>
-            </motion.div>
-          </motion.div>
-          
-          <motion.div
-            initial={{ opacity: 0, x: 50 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
-          >
-            <h2 className="text-sm font-bold text-cyan tracking-widest uppercase mb-3 flex items-center gap-2">
-              <span className="w-8 h-0.5 bg-cyan"></span> Meet the Expert
-            </h2>
-            <p className="text-3xl leading-snug font-black tracking-tight text-white md:text-5xl mb-6">
-              Trusted by Hundreds of Businesses across <span className="text-transparent bg-clip-text bg-linear-to-r from-gold to-[#e3b850]">Pakistan</span>
-            </p>
-            <div className="text-slate-400 leading-relaxed text-lg space-y-6">
-              <p>
-                Our lead consultant brings over two decades of practical experience navigating the complexities of Pakistan&apos;s legal, taxation, and corporate landscape. We provide authoritative advice to secure your business assets, ensure absolute compliance, and defend your rights.
-              </p>
-              
-              <ul className="space-y-4 pt-2">
-                {bulletPoints.map((item, index) => (
-                  <motion.li 
-                    initial={{ opacity: 0, y: 10 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: 0.4 + (index * 0.1) }}
-                    key={index} 
-                    className="flex items-center gap-4 p-3 rounded-xl hover:bg-white/5 transition-colors border border-transparent hover:border-white/5"
-                  >
-                    <div className="shrink-0 rounded-full bg-cyan-900/30 p-1">
-                      <CheckCircle2 className="h-5 w-5 text-cyan" />
-                    </div>
-                    <span className="text-slate-300 font-semibold">{item}</span>
-                  </motion.li>
+            <div className="relative z-10 flex-1 flex flex-col justify-between space-y-6">
+              <div className="space-y-4">
+                <div className="w-16 h-16 rounded-2xl bg-[#02050e] border border-gold/30 flex items-center justify-center text-xl font-bold text-gold shadow-lg shadow-gold/10">
+                  AR
+                </div>
+                <div>
+                  <h3 className="text-3xl font-extrabold text-white mb-1 group-hover:text-gold transition-colors duration-300">Advocate Ahmad Raza</h3>
+                  <p className="text-cyan font-bold tracking-wide text-sm">Senior Counsel (Civil Litigation & FBR/SECP Tax)</p>
+                </div>
+                <p className="text-slate-400 leading-relaxed text-sm">
+                  Trusted High Court Advocate with over 15 years of experience. Expert in FBR tax audits, SECP company registration, property registry (Registryan), and land mutations (Inteqal).
+                </p>
+              </div>
+ 
+              {/* Bullet Points */}
+              <ul className="space-y-2 pt-2">
+                {razoPoints.map((item, i) => (
+                  <li key={i} className="flex items-center gap-3 text-slate-300 font-semibold text-xs md:text-sm">
+                    <CheckCircle2 className="w-4 h-4 text-cyan shrink-0" />
+                    <span>{item}</span>
+                  </li>
                 ))}
               </ul>
+ 
+              <div className="pt-6">
+                <Link href="/about" className="group/link inline-flex items-center gap-2 font-black text-xs uppercase tracking-wider text-gold hover:text-white transition-colors">
+                  View Full Credentials <ArrowRight size={14} className="group-hover/link:translate-x-0.5 transition-transform" />
+                </Link>
+              </div>
             </div>
-            
-            <motion.div 
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.9 }}
-              className="mt-10"
-            >
-              <a href="#contact" className="group inline-flex items-center gap-3 text-gold font-bold text-lg hover:text-[#e3b850] transition-colors border-b-2 border-gold/30 hover:border-gold pb-1 px-1">
-                Read Full Biography
-                <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-              </a>
-            </motion.div>
           </motion.div>
+ 
+          {/* Khalil ur Rehman Butt Profile */}
+          <motion.div 
+            initial={{ opacity: 0, x: 40 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.7 }}
+            className="flex flex-col bg-[#040814]/40 border border-white/5 hover:border-gold/30 rounded-3xl p-8 md:p-12 relative overflow-hidden group transition-all duration-500 shadow-2xl hover:shadow-[0_0_30px_rgba(212,168,64,0.05)]"
+          >
+            <div className="absolute top-0 right-0 p-8 opacity-5 text-gold group-hover:scale-110 group-hover:-rotate-12 transition-transform duration-500 pointer-events-none">
+              <ShieldAlert className="w-56 h-56" />
+            </div>
+ 
+            <div className="relative z-10 flex-1 flex flex-col justify-between space-y-6">
+              <div className="space-y-4">
+                <div className="w-16 h-16 rounded-2xl bg-[#02050e] border border-emerald-500/30 flex items-center justify-center text-xl font-bold text-emerald-400 shadow-lg shadow-emerald-500/10">
+                  KRB
+                </div>
+                <div>
+                  <h3 className="text-3xl font-extrabold text-white mb-1 group-hover:text-gold transition-colors duration-300">Advocate Khalil ur Rehman Butt</h3>
+                  <p className="text-emerald-400 font-bold tracking-wide text-sm">Partner Advocate (Criminal Defense & Corporate Compliance)</p>
+                </div>
+                <p className="text-slate-400 leading-relaxed text-sm">
+                  High Court Advocate with over 5 years of active experience. Specializes in criminal cases, securing pre-arrest/post-arrest bail, police station representation, and provincial PRA / sales tax filings.
+                </p>
+              </div>
+
+              {/* Bullet Points */}
+              <ul className="space-y-2 pt-2">
+                {buttPoints.map((item, i) => (
+                  <li key={i} className="flex items-center gap-3 text-slate-300 font-semibold text-xs md:text-sm">
+                    <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0" />
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
+
+              <div className="pt-6">
+                <Link href="/about" className="group/link inline-flex items-center gap-2 font-black text-xs uppercase tracking-wider text-emerald-400 hover:text-white transition-colors">
+                  View Full Credentials <ArrowRight size={14} className="group-hover/link:translate-x-0.5 transition-transform" />
+                </Link>
+              </div>
+            </div>
+          </motion.div>
+
         </div>
       </div>
     </section>

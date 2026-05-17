@@ -19,13 +19,13 @@ export default function TaxationPage() {
         
         <div className="text-center max-w-4xl mx-auto mb-20">
           <div className="inline-flex items-center px-4 py-2 rounded-full bg-slate-900 border border-emerald-900 text-emerald-400 text-xs font-bold mb-6 shadow-[0_0_20px_rgba(16,185,129,0.2)]">
-            Financial & Corporate Compliance
+            FBR Tax Audits & Compliance
           </div>
           <h1 className="text-4xl md:text-6xl font-extrabold text-white tracking-tight mb-6">
-            Elite <span className="text-emerald-500">Tax Auditing</span> & Strategy
+            Simple <span className="text-emerald-500">Tax & Audit</span> Support
           </h1>
           <p className="text-xl text-slate-400 leading-relaxed">
-            Securing massive corporate wealth and ensuring 100% Federal Board of Revenue (FBR) and SECP compliance for Silicon Valley startups expanding to Pakistan.
+            We provide professional help for FBR tax returns, wealth statements, and direct representation in FBR tax audits and appeals.
           </p>
         </div>
 
@@ -43,12 +43,12 @@ export default function TaxationPage() {
         </div>
 
         <div className="bg-linear-to-tr from-emerald-950 to-slate-900 border border-slate-800 p-12 rounded-3xl text-center shadow-2xl relative overflow-hidden">
-          <h2 className="text-3xl font-bold text-white mb-6 relative z-10">Receive a Notice from the IRS/FBR?</h2>
+          <h2 className="text-3xl font-bold text-white mb-6 relative z-10">Received a Notice from FBR?</h2>
           <p className="text-slate-300 mb-8 max-w-2xl mx-auto relative z-10">
-            Never reply to a tax notice without legal representation. Upload your notice directly to our Encrypted Client Vault for immediate triage.
+            Do not worry. Contact our expert team of tax consultants today for professional legal advice and notice reply preparation.
           </p>
-          <a href="/dashboard/documents" className="inline-block px-10 py-5 bg-emerald-500 hover:bg-emerald-400 text-midnight font-black tracking-wide rounded-xl transition-all shadow-[0_0_20px_rgba(16,185,129,0.4)] transform hover:-translate-y-1 relative z-10">
-            Upload Notice to Secure Vault
+          <a href="/contact" className="inline-block px-10 py-5 bg-emerald-500 hover:bg-emerald-400 text-midnight font-black tracking-wide rounded-xl transition-all shadow-[0_0_20px_rgba(16,185,129,0.4)] transform hover:-translate-y-1 relative z-10">
+            Get Professional Help
           </a>
         </div>
 

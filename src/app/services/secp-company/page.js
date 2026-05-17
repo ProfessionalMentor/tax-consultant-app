@@ -18,14 +18,14 @@ export default function SECPRegistrationPage() {
   const content = (
     <div className="space-y-6">
       <p>
-        The Securities and Exchange Commission of Pakistan (SECP) mandates specific procedural intricacies to form a Private Limited or Single Member Company. Whether you are a local startup or a foreign entity looking to establish a branch in Pakistan, we bypass the bureaucratic hurdles on your behalf.
+        The Securities and Exchange Commission of Pakistan (SECP) has specific procedures to register a Private Limited or Single Member Company (SMC). We handle all the paperwork for you, making company registration fast and easy.
       </p>
-      <h2 className="text-2xl font-bold text-slate-900 pt-4">Corporate Structuring tailored for you</h2>
+      <h2 className="text-2xl font-bold text-slate-900 pt-4">Custom Corporate Registration</h2>
       <p>
-        Choosing the right corporate structure protects your personal assets and allows for dynamic growth and international investments. We provide exclusive consultation on share capital division, directorship allocations, and drafting the all-important Memorandum containing your company’s legal scope.
+        Choosing the right company type protects your personal assets and builds business trust. We guide you on shares division, directors, and draft your company's Memorandum of Association.
       </p>
       <p>
-        Post-incorporation, we continue managing your Form 29, Form A (Annual Returns), and ensure that your corporate veil remains flawlessly intact.
+        After registration, we also help you with annual compliance filings (Form A, Form 29) to keep your company fully active and legal.
       </p>
     </div>
   );
