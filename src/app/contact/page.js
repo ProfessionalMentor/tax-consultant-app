@@ -7,10 +7,7 @@ import ContactForm from '@/components/ContactForm';
 
 export default function ContactPage() {
   return (
-    <div className="pt-32 pb-24 bg-[#0a0f1c] min-h-screen relative overflow-hidden">
-      
-      {/* Decorative Blob */}
-      <div className="absolute top-1/3 left-0 w-[600px] h-[600px] bg-emerald-900/10 rounded-full blur-[150px] pointer-events-none -translate-x-1/2"></div>
+    <div className="pt-32 pb-24 bg-black min-h-screen relative overflow-hidden">
       
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
@@ -44,7 +41,7 @@ export default function ContactPage() {
             </div>
           </div>
           
-          <div className="bg-[#040814]/80 backdrop-blur-md p-8 rounded-3xl shadow-[0_0_40px_rgba(0,0,0,0.5)] border border-white/10 relative">
+          <div className="bg-black backdrop-blur-md p-8 rounded-3xl shadow-[0_0_40px_rgba(0,0,0,0.5)] border border-white/10 relative">
             <div className="absolute inset-0 bg-linear-to-br from-white/5 to-transparent rounded-3xl pointer-events-none"></div>
             <h2 className="text-2xl font-bold text-white mb-6 relative z-10">Book a Consultation</h2>
             <ContactForm />

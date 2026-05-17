@@ -7,9 +7,7 @@ export const metadata = {
 
 export default function AdminDashboard() {
   return (
-    <div className="min-h-screen bg-[#0a0f1c] pt-24 pb-12 relative overflow-hidden">
-      {/* Decorative Blob */}
-      <div className="absolute top-1/4 right-0 w-[500px] h-[500px] bg-emerald-900/10 rounded-full blur-[120px] pointer-events-none translate-x-1/2"></div>
+    <div className="min-h-screen bg-black pt-24 pb-12 relative overflow-hidden">
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
@@ -27,21 +25,21 @@ export default function AdminDashboard() {
 
         {/* Stats Grid */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10 relative z-10">
-          <div className="bg-[#040814]/80 backdrop-blur-xl p-6 rounded-3xl shadow-lg border border-white/5 flex items-center group hover:border-emerald-500/30 transition-colors">
+          <div className="bg-black backdrop-blur-xl p-6 rounded-3xl shadow-lg border border-white/5 flex items-center group hover:border-emerald-500/30 transition-colors">
             <div className="p-4 bg-emerald-500/10 rounded-xl mr-4 group-hover:bg-emerald-500/20 transition-colors"><Users className="w-8 h-8 text-emerald-400" /></div>
             <div>
               <p className="text-slate-400 text-sm font-semibold uppercase tracking-wide">Total Clients</p>
               <p className="text-3xl font-bold text-white">142</p>
             </div>
           </div>
-          <div className="bg-[#040814]/80 backdrop-blur-xl p-6 rounded-3xl shadow-lg border border-white/5 flex items-center group hover:border-gold/30 transition-colors">
+          <div className="bg-black backdrop-blur-xl p-6 rounded-3xl shadow-lg border border-white/5 flex items-center group hover:border-gold/30 transition-colors">
             <div className="p-4 bg-gold/10 rounded-xl mr-4 group-hover:bg-gold/20 transition-colors"><Calendar className="w-8 h-8 text-gold" /></div>
             <div>
               <p className="text-slate-400 text-sm font-semibold uppercase tracking-wide">Pending Appointments</p>
               <p className="text-3xl font-bold text-white">14</p>
             </div>
           </div>
-          <div className="bg-[#040814]/80 backdrop-blur-xl p-6 rounded-3xl shadow-lg border border-white/5 flex items-center group hover:border-cyan/30 transition-colors">
+          <div className="bg-black backdrop-blur-xl p-6 rounded-3xl shadow-lg border border-white/5 flex items-center group hover:border-cyan/30 transition-colors">
             <div className="p-4 bg-cyan/10 rounded-xl mr-4 group-hover:bg-cyan/20 transition-colors"><FileText className="w-8 h-8 text-cyan" /></div>
             <div>
               <p className="text-slate-400 text-sm font-semibold uppercase tracking-wide">New Uploads</p>
@@ -53,7 +51,7 @@ export default function AdminDashboard() {
         {/* Tables Section */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-10 relative z-10">
           {/* Main Table */}
-          <div className="lg:col-span-2 bg-[#040814]/80 backdrop-blur-xl rounded-3xl p-8 shadow-lg border border-white/5">
+          <div className="lg:col-span-2 bg-black backdrop-blur-xl rounded-3xl p-8 shadow-lg border border-white/5">
             <h2 className="text-xl font-bold text-white mb-6 border-b border-white/5 pb-4">Recent Leads & Appointments</h2>
             <div className="overflow-x-auto">
               <table className="w-full text-left border-collapse">
@@ -87,7 +85,7 @@ export default function AdminDashboard() {
           </div>
 
           {/* Side Panel */}
-          <div className="bg-[#040814]/80 backdrop-blur-xl rounded-3xl p-8 text-white shadow-[0_0_40px_rgba(0,0,0,0.5)] border border-white/10 relative overflow-hidden">
+          <div className="bg-black backdrop-blur-xl rounded-3xl p-8 text-white shadow-[0_0_40px_rgba(0,0,0,0.5)] border border-white/10 relative overflow-hidden">
             <h3 className="text-xl font-bold mb-6 relative z-10 text-transparent bg-clip-text bg-linear-to-r from-cyan to-emerald-400">Review Documents</h3>
             <p className="text-slate-400 text-sm mb-6 relative z-10">Clients have recently uploaded files requiring verification before submission to FBR.</p>
             

@@ -110,11 +110,11 @@ export default function DashboardPage() {
     return (
       <div className="space-y-6">
         <div>
-          <h1 className="text-3xl font-bold">Client Dashboard</h1>
-          <p className="text-gray-600">Overview of your legal and tax matters.</p>
+          <h1 className="text-3xl font-black text-white tracking-tight">Client Dashboard</h1>
+          <p className="text-slate-400">Overview of your legal and tax matters.</p>
         </div>
         <div className="flex items-center justify-center py-12">
-          <Loader2 className="animate-spin text-blue-600" size={32} />
+          <Loader2 className="animate-spin text-gold" size={32} />
         </div>
       </div>
     );
@@ -123,8 +123,8 @@ export default function DashboardPage() {
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-3xl font-bold">Client Dashboard</h1>
-        <p className="text-gray-600">Overview of your legal and tax matters.</p>
+        <h1 className="text-3xl font-black text-white tracking-tight">Client Dashboard</h1>
+        <p className="text-slate-400">Overview of your legal and tax matters.</p>
       </div>
 
       {error && (
@@ -139,14 +139,14 @@ export default function DashboardPage() {
 
           return (
             <Link href={item.href} key={item.title}>
-              <div className="bg-white rounded-2xl p-5 shadow-sm border hover:shadow-md transition-shadow cursor-pointer h-full">
-                <Icon className="mb-4 text-blue-600" size={24} />
+              <div className="bg-black rounded-2xl p-5 shadow-sm border border-white/5 hover:border-gold/30 transition-all cursor-pointer h-full">
+                <Icon className="mb-4 text-gold" size={24} />
 
-                <h3 className="text-gray-500 text-sm">{item.title}</h3>
+                <h3 className="text-slate-400 text-sm">{item.title}</h3>
 
-                <p className="text-2xl font-bold">{item.value}</p>
+                <p className="text-2xl font-black text-white">{item.value}</p>
 
-                <p className="text-sm text-gray-500">{item.desc}</p>
+                <p className="text-xs text-slate-500 mt-1">{item.desc}</p>
               </div>
             </Link>
           );
@@ -156,19 +156,19 @@ export default function DashboardPage() {
       {/* Quick Summary Section */}
       <div className="grid md:grid-cols-2 gap-6">
         {/* Recent Cases */}
-        <div className="bg-white rounded-2xl p-6 shadow-sm border">
-          <h2 className="text-xl font-bold mb-4">Recent Cases</h2>
+        <div className="bg-black rounded-2xl p-6 shadow-sm border border-white/5">
+          <h2 className="text-xl font-bold text-white mb-4">Recent Cases</h2>
           <div className="space-y-3">
             {stats?.totalCases > 0 ? (
-              <p className="text-sm text-gray-600">
+              <p className="text-sm text-slate-300">
                 You have {stats.totalCases} total cases
               </p>
             ) : (
-              <p className="text-sm text-gray-500">No cases yet</p>
+              <p className="text-sm text-slate-500">No cases yet</p>
             )}
             <Link
               href="/client/cases"
-              className="inline-block text-blue-600 hover:text-blue-700 font-medium text-sm"
+              className="inline-block text-cyan hover:text-gold font-bold text-sm transition-colors"
             >
               View all cases →
             </Link>
@@ -176,19 +176,19 @@ export default function DashboardPage() {
         </div>
 
         {/* Pending Invoices */}
-        <div className="bg-white rounded-2xl p-6 shadow-sm border">
-          <h2 className="text-xl font-bold mb-4">Billing</h2>
+        <div className="bg-black rounded-2xl p-6 shadow-sm border border-white/5">
+          <h2 className="text-xl font-bold text-white mb-4">Billing</h2>
           <div className="space-y-3">
             {stats?.pendingInvoices > 0 ? (
-              <p className="text-sm text-gray-600">
+              <p className="text-sm text-slate-300">
                 {stats.pendingInvoices} invoice(s) pending
               </p>
             ) : (
-              <p className="text-sm text-gray-500">All invoices paid</p>
+              <p className="text-sm text-slate-500">All invoices paid</p>
             )}
             <Link
               href="/client/billing"
-              className="inline-block text-blue-600 hover:text-blue-700 font-medium text-sm"
+              className="inline-block text-cyan hover:text-gold font-bold text-sm transition-colors"
             >
               View invoices →
             </Link>

@@ -55,12 +55,18 @@ const links = [
 
 export default function ClientSidebar() {
   return (
-    <aside className="w-72 min-h-screen bg-white border-r p-5">
-      <h2 className="text-2xl font-bold mb-8">
-        Client Portal
-      </h2>
+    <aside className="w-72 min-h-screen bg-black border-r border-white/10 p-6">
+      <div className="flex items-center gap-3 mb-10">
+        <div className="w-9 h-9 rounded-xl bg-black border border-gold/40 flex items-center justify-center shadow-md">
+          <Building2 className="text-gold w-5 h-5 animate-pulse" />
+        </div>
+        <div>
+          <span className="font-black text-sm text-white tracking-wide block leading-none">Client Hub</span>
+          <span className="text-[9px] font-bold text-cyan uppercase tracking-widest block mt-1">Digital Chamber</span>
+        </div>
+      </div>
 
-      <nav className="space-y-2">
+      <nav className="space-y-1.5">
         {links.map((item) => {
           const Icon = item.icon;
 
@@ -68,9 +74,9 @@ export default function ClientSidebar() {
             <Link
               key={item.href}
               href={item.href}
-              className="flex items-center gap-3 px-4 py-3 rounded-xl text-gray-700 hover:bg-blue-50 hover:text-blue-700 transition"
+              className="flex items-center gap-3 px-4 py-3 rounded-xl text-slate-400 hover:bg-slate-900/60 hover:text-gold border border-transparent hover:border-gold/20 transition-all text-xs md:text-sm font-semibold"
             >
-              <Icon size={20} />
+              <Icon size={18} className="shrink-0" />
               {item.name}
             </Link>
           );
