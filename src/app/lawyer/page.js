@@ -1572,7 +1572,7 @@ export default function LawyerDashboard() {
                                       ? "bg-slate-950 text-slate-200 border-slate-800 rounded-tr-none" 
                                       : "bg-slate-900/80 text-slate-200 border-slate-850 rounded-tl-none"
                                   }`}>
-                                    <p className="leading-relaxed break-words">{msg.content}</p>
+                                    <p className="leading-relaxed wrap-break-word">{msg.content}</p>
                                     <span className="text-[9px] text-slate-500 font-semibold block text-right mt-2 uppercase tracking-widest">
                                       {new Date(msg.createdAt).toLocaleTimeString()}
                                     </span>
