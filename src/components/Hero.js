@@ -1,8 +1,52 @@
 "use client";
 
+import { useEffect, useState, useRef } from 'react';
 import Link from 'next/link';
-import { motion } from 'framer-motion';
+import { motion, useInView } from 'framer-motion';
 import { ArrowRight, ShieldCheck } from 'lucide-react';
+
+function AnimatedCounter({ value, duration = 1.8, suffix = "", decimals = 0 }) {
+  const [count, setCount] = useState(0);
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, margin: "-50px" });
+
+  useEffect(() => {
+    if (!isInView) return;
+
+    let start = 0;
+    const end = parseFloat(value);
+    if (start === end) return;
+
+    const totalMilliseconds = duration * 1000;
+    const startTime = performance.now();
+
+    const updateCount = (currentTime) => {
+      const elapsed = currentTime - startTime;
+      const progress = Math.min(elapsed / totalMilliseconds, 1);
+      
+      // Ease out quad: f(x) = x * (2 - x)
+      const easeProgress = progress * (2 - progress);
+      
+      const currentVal = start + easeProgress * (end - start);
+      setCount(currentVal);
+
+      if (progress < 1) {
+        requestAnimationFrame(updateCount);
+      } else {
+        setCount(end);
+      }
+    };
+
+    requestAnimationFrame(updateCount);
+  }, [isInView, value, duration]);
+
+  return (
+    <span ref={ref}>
+      {decimals > 0 ? count.toFixed(decimals) : Math.floor(count)}
+      {suffix}
+    </span>
+  );
+}
 
 export default function Hero() {
   const containerVariants = {
@@ -26,7 +70,7 @@ export default function Hero() {
   };
 
   return (
-    <section className="relative w-full h-screen max-h-[100vh] flex items-center justify-center overflow-hidden bg-black pt-20 pb-4">
+    <section className="relative w-full h-screen max-h-screen flex items-center justify-center overflow-hidden bg-black pt-20 pb-4">
       {/* Premium Aurora Background Effect */}
       <div className="absolute inset-0 bg-black z-0"></div>
       
@@ -87,7 +131,9 @@ export default function Hero() {
               transition={{ type: "spring", stiffness: 200, damping: 15 }}
               className="flex flex-col items-center p-4 bg-[#040814]/40 backdrop-blur-md rounded-2xl border border-white/5 shadow-xl transition-all duration-500 cursor-pointer"
             >
-              <span className="text-3xl md:text-4xl font-black text-transparent bg-clip-text bg-linear-to-r from-gold via-[#e3b850] to-gold">99.2%</span>
+              <span className="text-3xl md:text-4xl font-black text-transparent bg-clip-text bg-linear-to-r from-gold via-[#e3b850] to-gold">
+                <AnimatedCounter value="99.2" decimals={1} suffix="%" />
+              </span>
               <span className="text-slate-400 font-bold text-[10px] uppercase tracking-widest mt-2">Satisfied Clients</span>
             </motion.div>
 
@@ -96,7 +142,9 @@ export default function Hero() {
               transition={{ type: "spring", stiffness: 200, damping: 15 }}
               className="flex flex-col items-center p-4 bg-[#040814]/40 backdrop-blur-md rounded-2xl border border-white/5 shadow-xl transition-all duration-500 cursor-pointer"
             >
-              <span className="text-3xl md:text-4xl font-black text-transparent bg-clip-text bg-linear-to-r from-cyan to-blue-500">300+</span>
+              <span className="text-3xl md:text-4xl font-black text-transparent bg-clip-text bg-linear-to-r from-cyan to-blue-500">
+                <AnimatedCounter value="300" decimals={0} suffix="+" />
+              </span>
               <span className="text-slate-400 font-bold text-[10px] uppercase tracking-widest mt-2">Active Clients</span>
             </motion.div>
 
@@ -105,7 +153,9 @@ export default function Hero() {
               transition={{ type: "spring", stiffness: 200, damping: 15 }}
               className="flex flex-col items-center p-4 bg-[#040814]/40 backdrop-blur-md rounded-2xl border border-white/5 shadow-xl transition-all duration-500 cursor-pointer"
             >
-              <span className="text-3xl md:text-4xl font-black text-transparent bg-clip-text bg-linear-to-r from-gold via-[#e3b850] to-gold">100+</span>
+              <span className="text-3xl md:text-4xl font-black text-transparent bg-clip-text bg-linear-to-r from-gold via-[#e3b850] to-gold">
+                <AnimatedCounter value="100" decimals={0} suffix="+" />
+              </span>
               <span className="text-slate-400 font-bold text-[10px] uppercase tracking-widest mt-2">Court Victories</span>
             </motion.div>
 
@@ -114,7 +164,9 @@ export default function Hero() {
               transition={{ type: "spring", stiffness: 200, damping: 15 }}
               className="flex flex-col items-center p-4 bg-[#040814]/40 backdrop-blur-md rounded-2xl border border-white/5 shadow-xl transition-all duration-500 cursor-pointer"
             >
-              <span className="text-3xl md:text-4xl font-black text-transparent bg-clip-text bg-linear-to-r from-cyan to-blue-500">20+</span>
+              <span className="text-3xl md:text-4xl font-black text-transparent bg-clip-text bg-linear-to-r from-cyan to-blue-500">
+                <AnimatedCounter value="20" decimals={0} suffix="+" />
+              </span>
               <span className="text-slate-400 font-bold text-[10px] uppercase tracking-widest mt-2">Years Experience</span>
             </motion.div>
           </motion.div>

@@ -10,9 +10,19 @@ export async function GET(req) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
+    const { role, id } = session.user;
+    let whereClause = {};
+
+    if (role === 'CLIENT') {
+      whereClause = { userId: id };
+    }
+
     const appointments = await prisma.appointment.findMany({
-      where: {
-        userId: session.user.id,
+      where: whereClause,
+      include: {
+        user: {
+          select: { id: true, name: true, email: true, phoneNumber: true },
+        },
       },
       orderBy: { scheduledFor: 'asc' },
     });

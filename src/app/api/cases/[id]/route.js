@@ -37,7 +37,11 @@ export async function GET(req, { params }) {
     }
 
     // Verify ownership
-    if (caseData.clientId !== session.user.id && session.user.role !== 'ADMIN') {
+    const isOwner = caseData.clientId === session.user.id;
+    const isAssignedLawyer = caseData.lawyerId === session.user.id;
+    const isAdmin = session.user.role === 'ADMIN' || session.user.role === 'SUPER_ADMIN';
+
+    if (!isOwner && !isAssignedLawyer && !isAdmin) {
       return NextResponse.json({ error: 'Forbidden' }, { status: 403 });
     }
 
@@ -62,14 +66,18 @@ export async function PUT(req, { params }) {
     // Verify ownership
     const existingCase = await prisma.case.findUnique({
       where: { id: caseId },
-      select: { clientId: true },
+      select: { clientId: true, lawyerId: true },
     });
 
     if (!existingCase) {
       return NextResponse.json({ error: 'Case not found' }, { status: 404 });
     }
 
-    if (existingCase.clientId !== session.user.id && session.user.role !== 'ADMIN') {
+    const isOwner = existingCase.clientId === session.user.id;
+    const isAssignedLawyer = existingCase.lawyerId === session.user.id;
+    const isAdmin = session.user.role === 'ADMIN' || session.user.role === 'SUPER_ADMIN';
+
+    if (!isOwner && !isAssignedLawyer && !isAdmin) {
       return NextResponse.json({ error: 'Forbidden' }, { status: 403 });
     }
 

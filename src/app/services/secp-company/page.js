@@ -22,7 +22,7 @@ export default function SECPRegistrationPage() {
       </p>
       <h2 className="text-2xl font-bold text-slate-900 pt-4">Custom Corporate Registration</h2>
       <p>
-        Choosing the right company type protects your personal assets and builds business trust. We guide you on shares division, directors, and draft your company's Memorandum of Association.
+        Choosing the right company type protects your personal assets and builds business trust. We guide you on shares division, directors, and draft your company&apos;s Memorandum of Association.
       </p>
       <p>
         After registration, we also help you with annual compliance filings (Form A, Form 29) to keep your company fully active and legal.

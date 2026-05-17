@@ -20,6 +20,17 @@ export default auth((req) => {
     }
   }
 
+  // Protect Lawyer Panel
+  if (nextUrl.pathname.startsWith("/lawyer")) {
+    if (!isLoggedIn) {
+      return NextResponse.redirect(new URL("/login", nextUrl));
+    }
+    // Strict RBAC: Only Lawyers, Admins, and Super Admins can access the Lawyer Panel
+    if (role !== "LAWYER" && role !== "ADMIN" && role !== "SUPER_ADMIN") {
+      return NextResponse.redirect(new URL("/client/dashboard", nextUrl));
+    }
+  }
+
   // Protect Client Portals
   if (nextUrl.pathname.startsWith("/dashboard") || nextUrl.pathname.startsWith("/client")) {
     if (!isLoggedIn) {
@@ -31,5 +42,5 @@ export default auth((req) => {
 });
 
 export const config = {
-  matcher: ["/admin/:path*", "/dashboard/:path*", "/client/:path*"],
+  matcher: ["/admin/:path*", "/lawyer/:path*", "/dashboard/:path*", "/client/:path*"],
 };

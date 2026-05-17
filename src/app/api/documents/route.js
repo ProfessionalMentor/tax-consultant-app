@@ -64,6 +64,8 @@ export async function POST(req) {
         documentType: formData.get('documentType') || 'OTHER',
         description: formData.get('description') || `Uploaded on ${new Date().toLocaleDateString()}`,
         isConfidential: formData.get('isConfidential') === 'true',
+        caseId: formData.get('caseId') || null,
+        metadata: formData.get('metadata') ? JSON.parse(formData.get('metadata')) : null,
       };
     } else {
       body = await req.json();
@@ -82,6 +84,15 @@ export async function POST(req) {
         metadata: body.metadata ? JSON.stringify(body.metadata) : null,
       },
     });
+
+    if (body.caseId) {
+      await prisma.caseDocument.create({
+        data: {
+          caseId: body.caseId,
+          documentId: document.id,
+        },
+      });
+    }
 
     return NextResponse.json(document, { status: 201 });
   } catch (error) {

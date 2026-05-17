@@ -30,7 +30,18 @@ export default function LoginPage() {
       if (res?.error) {
         setError("Invalid identity credentials.");
       } else {
-        router.push("/dashboard/tracker");
+        // Fetch session to determine role-based redirection
+        const sessionRes = await fetch("/api/auth/session");
+        const session = await sessionRes.json();
+        const role = session?.user?.role;
+
+        if (role === "ADMIN" || role === "SUPER_ADMIN") {
+          router.push("/admin");
+        } else if (role === "LAWYER") {
+          router.push("/lawyer");
+        } else {
+          router.push("/client/dashboard");
+        }
         router.refresh();
       }
     } catch (err) {

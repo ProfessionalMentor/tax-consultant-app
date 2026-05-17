@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Menu, X, Scale, User, ChevronDown, ArrowRight } from 'lucide-react';
+import { Menu, X, Scale, User, ChevronDown, ArrowRight, ShieldCheck } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const navItems = [
@@ -40,6 +40,7 @@ export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState(null);
+  const [portalDropdownOpen, setPortalDropdownOpen] = useState(false);
   const pathname = usePathname();
 
   useEffect(() => {
@@ -49,6 +50,9 @@ export default function Navbar() {
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  const isDashboard = pathname.startsWith('/admin') || pathname.startsWith('/lawyer') || pathname.startsWith('/client') || pathname.startsWith('/dashboard');
+  if (isDashboard) return null;
 
   return (
     <>
@@ -137,15 +141,57 @@ export default function Navbar() {
               ))}
               
               <div className="pl-6 ml-4 border-l border-white/10 hidden xl:flex items-center gap-5">
-                <Link 
-                  href="/login" 
-                  className="flex items-center gap-2.5 text-[15px] font-bold text-slate-300 hover:text-white transition-colors group"
+                
+                {/* Portals Dropdown */}
+                <div 
+                  className="relative group py-2"
+                  onMouseEnter={() => setPortalDropdownOpen(true)}
+                  onMouseLeave={() => setPortalDropdownOpen(false)}
                 >
-                  <div className="p-2 border border-slate-700 bg-slate-800/50 rounded-full group-hover:bg-slate-700 group-hover:border-cyan/50 transition-all shadow-inner relative overflow-hidden">
-                    <User className="w-4 h-4 text-cyan relative z-10" />
-                  </div>
-                  Client Portal
-                </Link>
+                  <button className="flex items-center gap-2.5 text-[15px] font-bold text-slate-350 hover:text-white transition-colors group">
+                    <div className="p-2 border border-slate-700 bg-slate-800/50 rounded-full group-hover:bg-slate-700 group-hover:border-cyan/50 transition-all shadow-inner relative overflow-hidden">
+                      <User className="w-4 h-4 text-cyan relative z-10" />
+                    </div>
+                    Secure Portals
+                    <ChevronDown className="w-4 h-4 text-slate-500 transition-transform group-hover:rotate-180" />
+                  </button>
+
+                  <AnimatePresence>
+                    {portalDropdownOpen && (
+                      <motion.div
+                        initial={{ opacity: 0, y: 15, scale: 0.95 }}
+                        animate={{ opacity: 1, y: 0, scale: 1 }}
+                        exit={{ opacity: 0, y: 10, scale: 0.95 }}
+                        transition={{ duration: 0.2, ease: "easeOut" }}
+                        className="absolute top-full right-0 mt-2 w-56 bg-[#0a0f1c]/95 backdrop-blur-2xl border border-white/10 rounded-2xl shadow-2xl overflow-hidden p-2 z-50"
+                      >
+                        <div className="flex flex-col gap-1">
+                          <Link 
+                            href="/login" 
+                            className="flex items-center gap-3 p-3 rounded-xl hover:bg-white/5 transition-all border border-transparent hover:border-white/10 text-slate-300 text-sm font-semibold"
+                          >
+                            <User className="w-4 h-4 text-cyan shrink-0" />
+                            <span>Client Portal</span>
+                          </Link>
+                          <Link 
+                            href="/lawyer" 
+                            className="flex items-center gap-3 p-3 rounded-xl hover:bg-white/5 transition-all border border-transparent hover:border-white/10 text-slate-300 text-sm font-semibold"
+                          >
+                            <Scale className="w-4 h-4 text-gold shrink-0" />
+                            <span>Lawyer Portal</span>
+                          </Link>
+                          <Link 
+                            href="/admin" 
+                            className="flex items-center gap-3 p-3 rounded-xl hover:bg-white/5 transition-all border border-transparent hover:border-white/10 text-slate-300 text-sm font-semibold"
+                          >
+                            <ShieldCheck className="w-4 h-4 text-rose-500 shrink-0" />
+                            <span>Admin Portal</span>
+                          </Link>
+                        </div>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </div>
 
                 <Link 
                   href="/contact" 
@@ -229,10 +275,26 @@ export default function Navbar() {
                 <Link 
                   href="/login" 
                   onClick={() => setMobileMenuOpen(false)}
-                  className="w-full flex items-center justify-center gap-3 p-4 rounded-2xl bg-slate-800/50 backdrop-blur-md border border-slate-700/50 hover:border-cyan/50 text-white font-bold transition-all shadow-lg"
+                  className="w-full flex items-center justify-center gap-3 p-4 rounded-2xl bg-slate-800/50 backdrop-blur-md border border-slate-700/50 hover:border-cyan/50 text-white font-bold transition-all shadow-lg text-sm"
                 >
-                  <User className="w-5 h-5 text-cyan" /> 
+                  <User className="w-5 h-5 text-cyan shrink-0" /> 
                   Secure Client Portal
+                </Link>
+                <Link 
+                  href="/lawyer" 
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="w-full flex items-center justify-center gap-3 p-4 rounded-2xl bg-slate-800/50 backdrop-blur-md border border-slate-700/50 hover:border-gold/50 text-white font-bold transition-all shadow-lg text-sm"
+                >
+                  <Scale className="w-5 h-5 text-gold shrink-0" /> 
+                  Advocate Lawyer Portal
+                </Link>
+                <Link 
+                  href="/admin" 
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="w-full flex items-center justify-center gap-3 p-4 rounded-2xl bg-slate-800/50 backdrop-blur-md border border-slate-700/50 hover:border-rose-500/50 text-white font-bold transition-all shadow-lg text-sm"
+                >
+                  <ShieldCheck className="w-5 h-5 text-rose-500 shrink-0" /> 
+                  Chamber Command (Admin)
                 </Link>
                 <Link 
                   href="/contact" 

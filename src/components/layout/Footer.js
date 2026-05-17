@@ -2,9 +2,14 @@
 
 import Link from 'next/link';
 import { Scale, MapPin, Mail, Phone, Calculator, Gavel, Building2, FileSpreadsheet, ShieldCheck, ExternalLink } from 'lucide-react';
+import { usePathname } from 'next/navigation';
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
+  const pathname = usePathname();
+
+  const isDashboard = pathname.startsWith('/admin') || pathname.startsWith('/lawyer') || pathname.startsWith('/client') || pathname.startsWith('/dashboard');
+  if (isDashboard) return null;
 
   return (
     <footer className="bg-black border-t border-white/10 pt-20 pb-10 text-slate-400 text-sm">

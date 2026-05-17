@@ -13,6 +13,7 @@ export default function RootLayout({ children }) {
     <html
       lang="en"
       className="h-full antialiased scroll-smooth"
+      data-scroll-behavior="smooth"
       suppressHydrationWarning
     >
       <body className="min-h-full flex flex-col bg-[#040814] text-slate-200 overflow-x-hidden selection:bg-gold/30 selection:text-gold">
