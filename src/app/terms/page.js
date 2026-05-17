@@ -24,10 +24,7 @@ export default function TermsOfServicePage() {
   ];
 
   return (
-    <div className="pt-32 pb-24 bg-[#02050e] min-h-screen text-slate-300 relative overflow-hidden">
-      {/* Decorative Glowing Elements */}
-      <div className="absolute top-1/4 left-1/4 w-[400px] h-[400px] bg-cyan-900/5 rounded-full blur-[100px] pointer-events-none z-0" />
-      <div className="absolute bottom-1/4 right-1/4 w-[400px] h-[400px] bg-amber-900/5 rounded-full blur-[120px] pointer-events-none z-0" />
+    <div className="pt-32 pb-24 bg-black min-h-screen text-slate-300 relative overflow-hidden">
 
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         

@@ -26,29 +26,9 @@ export default function Hero() {
   };
 
   return (
-    <section className="relative w-full h-screen max-h-[100vh] flex items-center justify-center overflow-hidden bg-[#040814] pt-20 pb-4">
+    <section className="relative w-full h-screen max-h-[100vh] flex items-center justify-center overflow-hidden bg-black pt-20 pb-4">
       {/* Premium Aurora Background Effect */}
-      <div className="absolute inset-0 bg-linear-to-br from-[#0a1128] via-[#040814] to-[#0d1f18] z-0"></div>
-      
-      {/* Animated Light Blobs */}
-      <motion.div 
-        animate={{ 
-          scale: [1, 1.15, 1],
-          opacity: [0.1, 0.12, 0.1],
-          rotate: [0, 90, 0]
-        }}
-        transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
-        className="absolute top-1/4 left-1/4 w-120 h-120 bg-cyan-700/15 rounded-full blur-[100px] -translate-x-1/2 -translate-y-1/2 pointer-events-none"
-      />
-      <motion.div 
-        animate={{ 
-          scale: [1, 1.2, 1],
-          opacity: [0.08, 0.1, 0.08],
-          rotate: [0, -90, 0]
-        }}
-        transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-        className="absolute bottom-1/4 right-1/4 w-140 h-140 bg-gold/80 rounded-full blur-[100px] translate-x-1/4 translate-y-1/4 pointer-events-none"
-      />
+      <div className="absolute inset-0 bg-black z-0"></div>
       
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full flex flex-col items-center justify-center h-full">
         <motion.div 

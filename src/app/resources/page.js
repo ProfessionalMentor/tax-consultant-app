@@ -263,11 +263,7 @@ export default function ResourcesPage() {
   ];
 
   return (
-    <div className="pt-32 pb-24 bg-[#02050e] min-h-screen relative overflow-hidden">
-      
-      {/* Decorative Aurora Background Glows */}
-      <div className="absolute top-1/4 left-1/4 w-[500px] h-[500px] bg-cyan-900/5 rounded-full blur-[120px] pointer-events-none z-0" />
-      <div className="absolute bottom-1/4 right-1/4 w-[500px] h-[500px] bg-amber-900/5 rounded-full blur-[140px] pointer-events-none z-0" />
+    <div className="pt-32 pb-24 bg-black min-h-screen relative overflow-hidden">
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         

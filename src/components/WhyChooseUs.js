@@ -50,10 +50,8 @@ export default function WhyChooseUs() {
   };
 
   return (
-    <section className="py-24 bg-[#02050e] relative overflow-hidden border-t border-white/5">
-      {/* Visual glowing elements */}
-      <div className="absolute top-1/2 left-1/2 w-[600px] h-[600px] bg-cyan-900/5 rounded-full blur-[140px] pointer-events-none -translate-x-1/2 -translate-y-1/2"></div>
-      
+    <section className="py-24 bg-black relative overflow-hidden border-t border-white/5">
+
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
         {/* Header Title */}
@@ -90,7 +88,7 @@ export default function WhyChooseUs() {
               key={index}
               className={`p-8 md:p-10 rounded-3xl bg-linear-to-br ${card.color} border backdrop-blur-md transition-all duration-500 shadow-xl cursor-pointer`}
             >
-              <div className="w-14 h-14 rounded-2xl bg-[#02050e] border border-white/5 flex items-center justify-center mb-6 shadow-md">
+              <div className="w-14 h-14 rounded-2xl bg-black border border-white/5 flex items-center justify-center mb-6 shadow-md">
                 {card.icon}
               </div>
               <h3 className="text-2xl font-bold text-white mb-3">

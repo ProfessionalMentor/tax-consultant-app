@@ -31,9 +31,7 @@ export default function FAQ() {
   };
 
   return (
-    <section className="py-24 bg-[#040814] relative overflow-hidden">
-      {/* Decorative gradient blur */}
-      <div className="absolute top-1/2 left-0 w-[400px] h-[400px] bg-indigo-900/10 rounded-full blur-[100px] pointer-events-none -translate-x-1/2 -translate-y-1/2"></div>
+    <section className="py-24 bg-black relative overflow-hidden">
 
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <motion.div 

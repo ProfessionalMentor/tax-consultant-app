@@ -73,11 +73,7 @@ export default function PortfolioPage() {
     : projects.filter(p => p.type === selectedFilter);
 
   return (
-    <div className="pt-32 pb-24 bg-[#02050e] min-h-screen text-slate-300 relative overflow-hidden">
-      
-      {/* Aurora Visual Background Glows */}
-      <div className="absolute top-1/4 left-1/4 w-[450px] h-[450px] bg-cyan-700/5 rounded-full blur-[100px] -translate-x-1/2 -translate-y-1/2 pointer-events-none z-0" />
-      <div className="absolute bottom-1/4 right-1/4 w-[450px] h-[450px] bg-amber-700/5 rounded-full blur-[120px] translate-x-1/4 translate-y-1/4 pointer-events-none z-0" />
+    <div className="pt-32 pb-24 bg-black min-h-screen text-slate-300 relative overflow-hidden">
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         

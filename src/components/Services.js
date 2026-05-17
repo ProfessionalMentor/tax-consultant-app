@@ -67,10 +67,7 @@ export default function Services() {
   };
 
   return (
-    <section id="services" className="py-24 bg-[#02050e] relative overflow-hidden">
-      {/* Visual background glows */}
-      <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-cyan-900/5 rounded-full blur-[100px] pointer-events-none translate-x-1/2 -translate-y-1/2"></div>
-      <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-amber-900/5 rounded-full blur-[120px] pointer-events-none -translate-x-1/2 translate-y-1/2"></div>
+    <section id="services" className="py-24 bg-black relative overflow-hidden">
       
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <motion.div 

@@ -20,10 +20,7 @@ export default function Profile() {
   ];
 
   return (
-    <section className="py-24 bg-[#02050e] relative overflow-hidden border-t border-white/5">
-      {/* Decorative glows */}
-      <div className="absolute right-0 bottom-0 w-[500px] h-[500px] bg-cyan-900/5 rounded-full blur-[120px] pointer-events-none translate-x-1/2 translate-y-1/2"></div>
-      <div className="absolute left-0 top-0 w-[500px] h-[500px] bg-amber-900/5 rounded-full blur-[120px] pointer-events-none -translate-x-1/2 -translate-y-1/2"></div>
+    <section className="py-24 bg-black relative overflow-hidden border-t border-white/5">
  
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
@@ -49,7 +46,7 @@ export default function Profile() {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, margin: "-100px" }}
             transition={{ duration: 0.7 }}
-            className="flex flex-col bg-[#040814]/40 border border-white/5 hover:border-gold/30 rounded-3xl p-8 md:p-12 relative overflow-hidden group transition-all duration-500 shadow-2xl hover:shadow-[0_0_30px_rgba(212,168,64,0.05)]"
+            className="flex flex-col bg-black border border-white/5 hover:border-gold/30 rounded-3xl p-8 md:p-12 relative overflow-hidden group transition-all duration-500 shadow-2xl hover:shadow-[0_0_30px_rgba(212,168,64,0.05)]"
           >
             <div className="absolute top-0 right-0 p-8 opacity-5 text-gold group-hover:scale-110 group-hover:rotate-12 transition-transform duration-500 pointer-events-none">
               <Award className="w-56 h-56" />
@@ -57,7 +54,7 @@ export default function Profile() {
             
             <div className="relative z-10 flex-1 flex flex-col justify-between space-y-6">
               <div className="space-y-4">
-                <div className="w-16 h-16 rounded-2xl bg-[#02050e] border border-gold/30 flex items-center justify-center text-xl font-bold text-gold shadow-lg shadow-gold/10">
+                <div className="w-16 h-16 rounded-2xl bg-black border border-gold/30 flex items-center justify-center text-xl font-bold text-gold shadow-lg shadow-gold/10">
                   AR
                 </div>
                 <div>
@@ -93,7 +90,7 @@ export default function Profile() {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, margin: "-100px" }}
             transition={{ duration: 0.7 }}
-            className="flex flex-col bg-[#040814]/40 border border-white/5 hover:border-gold/30 rounded-3xl p-8 md:p-12 relative overflow-hidden group transition-all duration-500 shadow-2xl hover:shadow-[0_0_30px_rgba(212,168,64,0.05)]"
+            className="flex flex-col bg-black border border-white/5 hover:border-gold/30 rounded-3xl p-8 md:p-12 relative overflow-hidden group transition-all duration-500 shadow-2xl hover:shadow-[0_0_30px_rgba(212,168,64,0.05)]"
           >
             <div className="absolute top-0 right-0 p-8 opacity-5 text-gold group-hover:scale-110 group-hover:-rotate-12 transition-transform duration-500 pointer-events-none">
               <ShieldAlert className="w-56 h-56" />
@@ -101,7 +98,7 @@ export default function Profile() {
  
             <div className="relative z-10 flex-1 flex flex-col justify-between space-y-6">
               <div className="space-y-4">
-                <div className="w-16 h-16 rounded-2xl bg-[#02050e] border border-emerald-500/30 flex items-center justify-center text-xl font-bold text-emerald-400 shadow-lg shadow-emerald-500/10">
+                <div className="w-16 h-16 rounded-2xl bg-black border border-emerald-500/30 flex items-center justify-center text-xl font-bold text-emerald-400 shadow-lg shadow-emerald-500/10">
                   KRB
                 </div>
                 <div>

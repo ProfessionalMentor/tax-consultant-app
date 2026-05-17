@@ -42,8 +42,7 @@ export default function Testimonials() {
   };
 
   return (
-    <section className="py-24 bg-[#040814] relative overflow-hidden border-t border-white/5">
-      <div className="absolute top-0 left-1/4 w-[400px] h-[400px] bg-gold/5 rounded-full blur-[100px] pointer-events-none -translate-y-1/2"></div>
+    <section className="py-24 bg-black relative overflow-hidden border-t border-white/5">
       
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <motion.div 
@@ -70,7 +69,7 @@ export default function Testimonials() {
             <motion.div 
               variants={itemVariants}
               key={index} 
-              className="bg-[#0a0f1c] p-8 rounded-3xl border border-white/10 hover:border-gold/30 transition-colors shadow-xl relative"
+              className="bg-black p-8 rounded-3xl border border-white/10 hover:border-gold/30 transition-colors shadow-xl relative"
             >
               <Quote className="absolute top-6 right-6 w-10 h-10 text-white/5" />
               <div className="flex mb-4">

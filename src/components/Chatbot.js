@@ -88,7 +88,11 @@ export default function Chatbot() {
               <div className="relative flex items-center">
                 <input
                   value={input || ''}
-                  onChange={handleInputChange}
+                  onChange={(e) => {
+                    if (handleInputChange) {
+                      handleInputChange(e);
+                    }
+                  }}
                   placeholder="Ask about SECP, FBR, or Law..."
                   className="w-full bg-slate-900 border border-slate-700 rounded-full py-3 px-5 pr-12 text-sm text-white focus:outline-none focus:border-cyan focus:ring-1 focus:ring-cyan transition-all placeholder:text-slate-500"
                 />
