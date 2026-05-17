@@ -31,7 +31,7 @@ export default function LoginPage() {
         setError("Invalid identity credentials.");
       } else {
         // Fetch session to determine role-based redirection
-        const sessionRes = await fetch("/api/auth/session");
+        const sessionRes = await fetch("/api/auth/session", { cache: "no-store" });
         const session = await sessionRes.json();
         const role = session?.user?.role;
 

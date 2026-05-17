@@ -16,7 +16,7 @@ export default auth((req) => {
     }
     // Strict RBAC: Only Admins/Super Admins can access the CRM
     if (role !== "ADMIN" && role !== "SUPER_ADMIN") {
-      return NextResponse.redirect(new URL("/dashboard", nextUrl));
+      return NextResponse.redirect(new URL("/client/dashboard", nextUrl));
     }
   }
 
