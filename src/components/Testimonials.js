@@ -69,7 +69,7 @@ export default function Testimonials() {
             <motion.div 
               variants={itemVariants}
               key={index} 
-              className="bg-black p-8 rounded-3xl border border-white/10 hover:border-gold/30 transition-colors shadow-xl relative"
+              className="bg-linear-to-br from-[#0c0f1d] via-black to-[#020408] p-8 rounded-3xl border border-white/10 hover:border-gold/30 transition-all shadow-xl relative"
             >
               <Quote className="absolute top-6 right-6 w-10 h-10 text-white/5" />
               <div className="flex mb-4">

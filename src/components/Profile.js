@@ -46,7 +46,7 @@ export default function Profile() {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, margin: "-100px" }}
             transition={{ duration: 0.7 }}
-            className="flex flex-col bg-black border border-white/5 hover:border-gold/30 rounded-3xl p-8 md:p-12 relative overflow-hidden group transition-all duration-500 shadow-2xl hover:shadow-[0_0_30px_rgba(212,168,64,0.05)]"
+            className="flex flex-col bg-linear-to-br from-[#1a130b] via-[#020508] to-black border border-white/5 hover:border-gold/30 rounded-3xl p-8 md:p-12 relative overflow-hidden group transition-all duration-500 shadow-2xl hover:shadow-[0_0_30px_rgba(212,168,64,0.05)]"
           >
             <div className="absolute top-0 right-0 p-8 opacity-5 text-gold group-hover:scale-110 group-hover:rotate-12 transition-transform duration-500 pointer-events-none">
               <Award className="w-56 h-56" />
@@ -90,7 +90,7 @@ export default function Profile() {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, margin: "-100px" }}
             transition={{ duration: 0.7 }}
-            className="flex flex-col bg-black border border-white/5 hover:border-gold/30 rounded-3xl p-8 md:p-12 relative overflow-hidden group transition-all duration-500 shadow-2xl hover:shadow-[0_0_30px_rgba(212,168,64,0.05)]"
+            className="flex flex-col bg-linear-to-br from-[#0c2214] via-[#020508] to-black border border-white/5 hover:border-gold/30 rounded-3xl p-8 md:p-12 relative overflow-hidden group transition-all duration-500 shadow-2xl hover:shadow-[0_0_30px_rgba(212,168,64,0.05)]"
           >
             <div className="absolute top-0 right-0 p-8 opacity-5 text-gold group-hover:scale-110 group-hover:-rotate-12 transition-transform duration-500 pointer-events-none">
               <ShieldAlert className="w-56 h-56" />

@@ -29,19 +29,19 @@ export default function AboutPage() {
           
           <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
             {/* Profile 1: Ahmad Raza */}
-            <div className="bg-black backdrop-blur-md rounded-3xl p-8 relative overflow-hidden group hover:shadow-[0_0_30px_rgba(212,168,64,0.15)] hover:border-gold/30 border border-white/5 transition-all duration-300">
+            <div className="bg-linear-to-br from-[#1a130b] via-black to-black backdrop-blur-md rounded-3xl p-8 relative overflow-hidden group hover:shadow-[0_0_30px_rgba(212,168,64,0.15)] hover:border-gold/30 border border-white/5 transition-all duration-300">
               <div className="absolute top-0 right-0 p-8 opacity-10 text-gold group-hover:scale-110 group-hover:rotate-12 transition-transform duration-500">
                 <Scale className="w-48 h-48" />
               </div>
               <div className="relative z-10 text-white">
-                <div className="w-20 h-20 rounded-2xl bg-slate-900 border border-gold/30 flex items-center justify-center text-3xl font-bold mb-6 text-gold shadow-lg shadow-gold/10">
+                <div className="w-20 h-20 rounded-2xl bg-black border border-gold/30 flex items-center justify-center text-3xl font-bold mb-6 text-gold shadow-lg shadow-gold/10">
                   AR
                 </div>
                 <h3 className="text-3xl font-extrabold mb-2">Advocate Ahmad Raza</h3>
                 <p className="text-cyan font-medium tracking-wide mb-6">Senior Counsel (Civil Litigation & FBR/SECP Tax)</p>
                 <div className="space-y-4">
                   <div className="bg-black/50 p-4 rounded-xl border border-white/5">
-                    <p className="text-sm text-slate-300">Over 15 years of experience specializing in Lahore High Court civil property disputes, land registries ("Registryan"), mutations ("Inteqal"), FBR corporate tax filings, and SECP company registration.</p>
+                    <p className="text-sm text-slate-300">Over 15 years of experience specializing in Lahore High Court civil property disputes, land registries (&quot;Registryan&quot;), mutations (&quot;Inteqal&quot;), FBR corporate tax filings, and SECP company registration.</p>
                   </div>
                   <ul className="grid grid-cols-2 gap-3 text-sm font-medium text-slate-400">
                     <li className="flex items-center"><Award className="w-4 h-4 mr-2 text-gold" /> High Court Advocate</li>
@@ -52,12 +52,12 @@ export default function AboutPage() {
             </div>
 
             {/* Profile 2: Khalil ur Rehman Butt */}
-            <div className="bg-black backdrop-blur-md rounded-3xl p-8 border border-white/5 shadow-lg relative overflow-hidden group hover:shadow-[0_0_30px_rgba(52,211,153,0.15)] hover:border-emerald-500/30 transition-all duration-300">
+            <div className="bg-linear-to-br from-[#0c2214] via-black to-black backdrop-blur-md rounded-3xl p-8 border border-white/5 shadow-lg relative overflow-hidden group hover:shadow-[0_0_30px_rgba(52,211,153,0.15)] hover:border-emerald-500/30 transition-all duration-300">
               <div className="absolute top-0 right-0 p-8 opacity-10 text-emerald-500 group-hover:-rotate-12 group-hover:scale-110 transition-transform duration-500">
                 <Shield className="w-48 h-48" />
               </div>
               <div className="relative z-10 text-white">
-                <div className="w-20 h-20 rounded-2xl bg-slate-900 border border-emerald-500/30 flex items-center justify-center text-3xl font-bold mb-6 text-emerald-400 shadow-lg shadow-emerald-500/10">
+                <div className="w-20 h-20 rounded-2xl bg-black border border-emerald-500/30 flex items-center justify-center text-3xl font-bold mb-6 text-emerald-400 shadow-lg shadow-emerald-500/10">
                   KRB
                 </div>
                 <h3 className="text-3xl font-extrabold mb-2">Advocate Khalil ur Rehman Butt</h3>

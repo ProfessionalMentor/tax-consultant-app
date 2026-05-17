@@ -300,8 +300,8 @@ export default function ResourcesPage() {
         {/* Grid Vault Categories */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {categories.map((cat, idx) => (
-            <div key={idx} className="bg-slate-900/40 border border-white/5 rounded-3xl p-8 hover:border-white/10 hover:bg-slate-900/60 transition-all duration-500 shadow-2xl backdrop-blur-md">
-              <div className="w-14 h-14 bg-slate-950 rounded-2xl flex items-center justify-center mb-6 shadow-inner border border-white/5">
+            <div key={idx} className="bg-linear-to-br from-[#0c0f1d] via-black to-[#020408] border border-white/5 rounded-3xl p-8 hover:border-gold/30 transition-all duration-500 shadow-2xl backdrop-blur-md">
+              <div className="w-14 h-14 bg-black rounded-2xl flex items-center justify-center mb-6 shadow-inner border border-white/5">
                 {cat.icon}
               </div>
               <h2 className="text-2xl font-black text-white mb-6 tracking-tight">{cat.title}</h2>

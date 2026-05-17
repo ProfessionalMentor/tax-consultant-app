@@ -57,8 +57,8 @@ export default function FAQ() {
               key={index} 
               className={`border rounded-2xl overflow-hidden backdrop-blur-md transition-all duration-300 ${
                 openIndex === index 
-                  ? 'bg-slate-900/80 border-cyan/40 shadow-[0_0_20px_rgba(34,211,238,0.1)]' 
-                  : 'bg-[#0a0f1c]/50 border-white/5 hover:border-white/10 hover:bg-slate-900/50'
+                  ? 'bg-linear-to-br from-[#0a1b29] via-black to-[#020408] border-cyan/50 shadow-[0_0_20px_rgba(6,182,212,0.15)]' 
+                  : 'bg-linear-to-br from-[#0c0f1d] via-black to-[#020408] border-white/5 hover:border-gold/30'
               }`}
             >
               <button

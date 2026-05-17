@@ -9,21 +9,49 @@ export default function ContactForm() {
     service: 'Filer / Income Tax Return',
   });
 
+  const [loading, setLoading] = useState(false);
+  const [success, setSuccess] = useState(false);
+
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.id]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
+    setSuccess(false);
     
-    // Format the message for WhatsApp
-    const message = `*New Consultation Request*%0A%0A*Name:* ${formData.name}%0A*Phone:* ${formData.phone}%0A*Service Required:* ${formData.service}`;
-    
-    // Your WhatsApp number (with country code, no + or spaces)
-    const whatsappNumber = "923000000000"; 
-    
-    // Open WhatsApp in a new tab
-    window.open(`https://wa.me/${whatsappNumber}?text=${message}`, '_blank');
+    try {
+      // 1. Save consultation to MongoDB
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: formData.name,
+          phone: formData.phone,
+          service: formData.service,
+          message: "Request logged via Contact Us page."
+        })
+      });
+      
+      // 2. Open WhatsApp anyway (for instant advocate attention)
+      const message = `*New Consultation Request*%0A%0A*Name:* ${formData.name}%0A*Phone:* ${formData.phone}%0A*Service Required:* ${formData.service}`;
+      const whatsappNumber = "923004882260"; // Verified advocate mobile
+      window.open(`https://wa.me/${whatsappNumber}?text=${message}`, '_blank');
+
+      if (res.ok) {
+        setSuccess(true);
+        setFormData({
+          name: '',
+          phone: '',
+          service: 'Filer / Income Tax Return',
+        });
+      }
+    } catch (err) {
+      console.error("Database connection issue, proceeding to WhatsApp:", err);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -67,11 +95,17 @@ export default function ContactForm() {
           <option className="bg-slate-900">Other</option>
         </select>
       </div>
+      {success && (
+        <div className="bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 p-4 rounded-xl text-sm text-center">
+          ✓ Lead successfully saved to MongoDB database! Redirecting to WhatsApp...
+        </div>
+      )}
       <button 
         type="submit" 
-        className="w-full flex justify-center py-4 px-4 border border-transparent rounded-xl shadow-[0_0_20px_rgba(212,168,64,0.2)] text-lg font-bold text-[#040814] bg-linear-to-r from-gold to-[#c59628] hover:from-[#e3b850] hover:to-gold focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-[#0a0f1c] focus:ring-gold transition-all transform hover:-translate-y-1"
+        disabled={loading}
+        className="w-full flex justify-center py-4 px-4 border border-transparent rounded-xl shadow-[0_0_20px_rgba(212,168,64,0.2)] text-lg font-bold text-[#040814] bg-linear-to-r from-gold to-[#c59628] hover:from-[#e3b850] hover:to-gold focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-[#0a0f1c] focus:ring-gold transition-all transform hover:-translate-y-1 disabled:opacity-50"
       >
-        Request via WhatsApp
+        {loading ? "Processing..." : "Request via WhatsApp"}
       </button>
     </form>
   );

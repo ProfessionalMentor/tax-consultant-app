@@ -51,7 +51,7 @@ const CaseSchema = new mongoose.Schema(
       },
     ],
   },
-  { timestamps: true }
+  { timestamps: true, collection: "Case" }
 );
 
 export default mongoose.models.Case || mongoose.model("Case", CaseSchema);

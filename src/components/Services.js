@@ -99,11 +99,11 @@ export default function Services() {
             <motion.div 
               variants={itemVariants}
               key={index} 
-              className="group relative bg-[#040814]/40 backdrop-blur-md p-8 rounded-3xl border border-white/5 hover:border-gold/30 hover:bg-[#070b15] transition-all duration-500 cursor-pointer shadow-lg hover:shadow-[0_0_20px_rgba(212,168,64,0.05)]"
+              className="group relative bg-linear-to-br from-[#0c0f1d] via-black to-[#020408] backdrop-blur-md p-8 rounded-3xl border border-white/5 hover:border-gold/30 transition-all duration-500 cursor-pointer shadow-lg hover:shadow-[0_0_20px_rgba(212,168,64,0.05)]"
             >
               <div className="absolute inset-0 bg-linear-to-br from-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-3xl" />
               
-              <div className="w-16 h-16 rounded-2xl bg-[#02050e] flex items-center justify-center border border-white/5 mb-6 group-hover:scale-110 transition-transform duration-500 relative z-10 shadow-lg">
+              <div className="w-16 h-16 rounded-2xl bg-black flex items-center justify-center border border-white/5 mb-6 group-hover:scale-110 transition-transform duration-500 relative z-10 shadow-lg">
                 {service.icon}
               </div>
               <h3 className="text-xl font-bold text-white mb-3 group-hover:text-gold transition-colors duration-300 relative z-10">

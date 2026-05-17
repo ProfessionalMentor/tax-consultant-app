@@ -10,25 +10,25 @@ export default function WhyChooseUs() {
       title: "Easy Online Updates",
       description: "No need to visit government offices repeatedly. We keep you completely updated on your case or tax status directly via WhatsApp and phone.",
       icon: <MessageSquare className="w-6 h-6 text-cyan" />,
-      color: "from-cyan-950/20 to-transparent border-cyan-500/10 hover:border-cyan-500/30"
+      color: "from-[#0a1b29] via-[#020508] to-black border-cyan-500/15 hover:border-cyan-500/40"
     },
     {
       title: "100% Safe & Confidential",
       description: "Your personal data, CNIC copies, and FBR login credentials are kept highly secure under strict advocate-client privacy.",
       icon: <ShieldCheck className="w-6 h-6 text-amber-500" />,
-      color: "from-amber-950/20 to-transparent border-gold/10 hover:border-gold/30"
+      color: "from-[#22170b] via-[#020508] to-black border-gold/15 hover:border-gold/40"
     },
     {
       title: "Direct Advocate Access",
       description: "Speak directly with Advocate Ahmad Raza and Advocate Khalil ur Rehman Butt. No middle agents, no confusion.",
       icon: <Users className="w-6 h-6 text-cyan" />,
-      color: "from-cyan-950/20 to-transparent border-cyan-500/10 hover:border-cyan-500/30"
+      color: "from-[#0a1b29] via-[#020508] to-black border-cyan-500/15 hover:border-cyan-500/40"
     },
     {
       title: "Transparent & Simple Pricing",
       description: "Clear and honest consultation rates. We provide simple upfront quotes with zero hidden charges or extra fees.",
       icon: <DollarSign className="w-6 h-6 text-amber-500" />,
-      color: "from-amber-950/20 to-transparent border-gold/10 hover:border-gold/30"
+      color: "from-[#22170b] via-[#020508] to-black border-gold/15 hover:border-gold/40"
     }
   ];
 
